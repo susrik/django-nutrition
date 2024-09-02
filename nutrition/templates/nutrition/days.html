@@ -26,6 +26,9 @@
                 <tr class="hover">
                     <td class="px-4 py-2">{{ d.date }}</td>
                     <td class="px-4 py-2">{{ d.calories }}</td>
+                    <td class="px-4 py-2">
+                        <a href="{% url 'day' d.date %}" class="text-blue-500 underline">Details</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

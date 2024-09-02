@@ -24,5 +24,8 @@ class Portion(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     meal = models.ForeignKey(Meal, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def calories(self):
+        return self.food.calories * self.quantity
+
     def __str__(self):
         return f'{self.food.name} ({self.quantity})'

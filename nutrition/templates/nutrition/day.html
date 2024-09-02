@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day Calories</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleSubtable(meal_name) {
+            const subtable = document.getElementById('subtable-' + meal_name);
+            subtable.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body>
+
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-4">DaisyUI Table</h1>
+
+    <div class="overflow-x-auto">
+        <table class="table w-full">
+            <!-- Table Head -->
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Meal</th>
+                    <th class="px-4 py-2">Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, meal in meals.items %}
+                <tr class="hover cursor-pointer" onclick="toggleSubtable('{{ name }}')">
+                    <td class="px-4 py-2">{{ name }}</td>
+                    <td class="px-4 py-2">{{ meal.calories }}</td>
+                </tr>
+                <tr id="subtable-{{ name }}" class="hidden">
+                    <td colspan="2">
+                        <div class="overflow-x-auto">
+                            {% include 'nutrition/portions.html' with portions=meal.portions %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

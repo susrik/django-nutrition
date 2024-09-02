@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.utils import timezone
 from .models import Portion, Food, Meal
 from django.views import generic
+from django.template import loader
+
 
 
 class DayTotal:
@@ -33,3 +35,18 @@ class DaysView(generic.ListView):
         start_date = timezone.now() - timezone.timedelta(weeks=4)
         _days = DayTotal.get_totals(Portion.objects.filter(date__gte=start_date))
         return sorted(_days, key=lambda d: d.date, reverse=True)
+
+
+def day(request, day_str):
+
+    day_portions = Portion.objects.filter(date=day_str)
+
+    meals = dict()
+    for p in day_portions:
+        meal_name = p.meal.name if p.meal else 'other'
+        _m = meals.setdefault(meal_name, {'calories': 0, 'portions': []})
+        _m['calories'] += p.calories()
+        _m['portions'].append(p)
+
+    template = loader.get_template("nutrition/day.html")
+    return HttpResponse(template.render({'meals': meals}, request))
