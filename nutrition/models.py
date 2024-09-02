@@ -18,11 +18,11 @@ class Meal(models.Model):
 
 
 class Portion(models.Model):
-    date = models.DateField(default=timezone.now().date())
+    date = models.DateField(default=timezone.now)
     quantity = models.FloatField(default=1)
     note = models.CharField(max_length=200, blank=True)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, blank=True)
+    meal = models.ForeignKey(Meal, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'{self.food.name} ({self.quantity})'
