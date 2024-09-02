@@ -14,9 +14,9 @@
     </script>
 </head>
 <body>
-
 <div class="container mx-auto mt-10">
-    <h1 class="text-2xl font-bold mb-4">DaisyUI Table</h1>
+    <h1 class="text-2xl font-bold mb-4">Meals {{ date }}</h1>
+    <h2 class="text-2xl font-bold mb-4">Total kcal: {{ calories }}</h2>
 
     <div class="overflow-x-auto">
         <table class="table w-full">
@@ -28,15 +28,15 @@
                 </tr>
             </thead>
             <tbody>
-                {% for name, meal in meals.items %}
-                <tr class="hover cursor-pointer" onclick="toggleSubtable('{{ name }}')">
-                    <td class="px-4 py-2">{{ name }}</td>
-                    <td class="px-4 py-2">{{ meal.calories }}</td>
+                {% for m in meals %}
+                <tr class="hover cursor-pointer" onclick="toggleSubtable('{{ m.name }}')">
+                    <td class="px-4 py-2">{{ m.name }}</td>
+                    <td class="px-4 py-2">{{ m.calories }}</td>
                 </tr>
-                <tr id="subtable-{{ name }}" class="hidden">
+                <tr id="subtable-{{ m.name }}" class="hidden">
                     <td colspan="2">
                         <div class="overflow-x-auto">
-                            {% include 'nutrition/portions.html' with portions=meal.portions %}
+                            {% include 'nutrition/portions.html' with portions=m.portions %}
                         </div>
                     </td>
                 </tr>

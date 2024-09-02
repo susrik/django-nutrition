@@ -6,16 +6,36 @@ from django.views import generic
 from django.template import loader
 
 
+class MealTotal:
+    def __init__(self, name: str, portions: Iterable[Portion]):
+        self.name = name
+        self.portions = portions
+        self.calories = sum(p.calories() for p in portions)
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'calories': self.calories,
+            'portions': self.portions
+        }
+
+    @staticmethod
+    def split_portions(portions: Iterable[Portion]) -> List['MealTotal']:
+        _meals = dict()
+        for p in portions:
+            meal_name = p.meal.name if p.meal else 'other'
+            _m = _meals.setdefault(meal_name, []).append(p)
+        return [MealTotal(_name, _portions) for _name, _portions in _meals.items()]
+
 
 class DayTotal:
     def __init__(self, date: timezone, portions: Iterable[Portion]):
         self.date = date
-        self.calories = 0
-        for p in portions:
-            self.calories += p.food.calories * p.quantity
+        self.calories = sum(p.calories() for p in portions)
+        self.meals = MealTotal.split_portions(portions)
 
     @staticmethod
-    def get_totals(portions: Iterable[Portion]) -> List['DayTotal']:
+    def split_days(portions: Iterable[Portion]) -> List['DayTotal']:
         portions_per_day = dict()
         for p in portions:
             portions_per_day.setdefault(p.date, []).append(p)
@@ -33,20 +53,16 @@ class DaysView(generic.ListView):
 
     def get_queryset(self):
         start_date = timezone.now() - timezone.timedelta(weeks=4)
-        _days = DayTotal.get_totals(Portion.objects.filter(date__gte=start_date))
+        _days = DayTotal.split_days(Portion.objects.filter(date__gte=start_date))
         return sorted(_days, key=lambda d: d.date, reverse=True)
 
 
 def day(request, day_str):
-
-    day_portions = Portion.objects.filter(date=day_str)
-
-    meals = dict()
-    for p in day_portions:
-        meal_name = p.meal.name if p.meal else 'other'
-        _m = meals.setdefault(meal_name, {'calories': 0, 'portions': []})
-        _m['calories'] += p.calories()
-        _m['portions'].append(p)
-
+    meals = MealTotal.split_portions(Portion.objects.filter(date=day_str))
     template = loader.get_template("nutrition/day.html")
-    return HttpResponse(template.render({'meals': meals}, request))
+    context = {
+        'meals': meals,
+        'date': day_str,
+        'calories': sum(m.calories for m in meals)
+    }
+    return HttpResponse(template.render(context, request))
