@@ -8,9 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>New Portion</h1>
+    <h1 class="text-2xl font-bold mb-4">New Portion</h1>
+
     <div class="container mx-auto py-8">
-        <h1 class="text-2xl font-bold mb-4">Add a New Portion</h1>
 
         <form method="post" class="space-y-4">
             {% csrf_token %}
@@ -40,9 +40,10 @@
             </div>
 
             <!-- Submit button -->
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <div></div> <!-- empty cell for alignment -->
-                <button type="submit" class="btn btn-primary">Add Portion</button>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="col-span-2 text-center">
+                    <button type="submit" class="btn btn-primary">Add Portion</button>
+                </div>
             </div>
         </form>
     </div>
