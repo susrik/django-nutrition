@@ -4,13 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Portion</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>Add New Portion</h1>
+    <h1>New Portion</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
+        <div class="flex items-center space-x-4">
+            <label class="label">Date</label>
+            {{ form.date }}
+        </div>
+        <div class="flex items-center space-x-4">
+            <label class="label">Quantity</label>
+            {{ form.quantity }}
+        </div>
+        <div class="flex items-center space-x-4">
+            <label class="label">Food</label>
+            {{ form.food }}
+        </div>
+        <div class="flex items-center space-x-4">
+            <label class="label">Meal (Optional)</label>
+            {{ form.meal }}
+        </div>
+        <div class="flex">
+            <button type="submit" class="btn btn-primary">Add Portion</button>
+        </div>
     </form>
 </body>
 </html>

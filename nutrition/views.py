@@ -75,9 +75,26 @@ class PortionForm(forms.ModelForm):
         model = Portion
         fields = ['date', 'quantity', 'food', 'meal']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'quantity': forms.NumberInput(attrs={'step': 0.1}),
-        }
+            'date': forms.DateInput(attrs={
+                  # DaisyUI input styling
+                'class': 'input input-bordered w-full max-w-xs',
+                'type': 'date'}),
+            'quantity': forms.NumberInput(attrs={
+                  # DaisyUI input styling
+                'class': 'input input-bordered w-full max-w-xs',
+                'step': 0.1}),
+            'food': forms.Select(attrs={
+                # DaisyUI select style
+                'class': 'select select-bordered w-full max-w-xs',
+            }),
+            'meal': forms.Select(attrs={
+                # DaisyUI select style
+                'class': 'select select-bordered w-full max-w-xs',
+            }),
+
+
+        
+          }
 
 def add_portion(request):
     default_date = request.GET.get('date', timezone.now().date())
