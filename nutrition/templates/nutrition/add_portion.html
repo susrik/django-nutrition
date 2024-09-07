@@ -9,27 +9,42 @@
 </head>
 <body>
     <h1>New Portion</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div class="flex items-center space-x-4">
-            <label class="label">Date</label>
-            {{ form.date }}
-        </div>
-        <div class="flex items-center space-x-4">
-            <label class="label">Quantity</label>
-            {{ form.quantity }}
-        </div>
-        <div class="flex items-center space-x-4">
-            <label class="label">Food</label>
-            {{ form.food }}
-        </div>
-        <div class="flex items-center space-x-4">
-            <label class="label">Meal (Optional)</label>
-            {{ form.meal }}
-        </div>
-        <div class="flex">
-            <button type="submit" class="btn btn-primary">Add Portion</button>
-        </div>
-    </form>
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">Add a New Portion</h1>
+
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+
+            <!-- Date field -->
+            <div class="grid grid-cols-2 gap-4 items-center">
+                <label class="text-right label">Date</label>
+                <div>{{ form.date }}</div>
+            </div>
+
+            <!-- Quantity field -->
+            <div class="grid grid-cols-2 gap-4 items-center">
+                <label class="text-right label">Quantity</label>
+                <div>{{ form.quantity }}</div>
+            </div>
+
+            <!-- Food field -->
+            <div class="grid grid-cols-2 gap-4 items-center">
+                <label class="text-right label">Food</label>
+                <div>{{ form.food }}</div>
+            </div>
+
+            <!-- Meal field (optional) -->
+            <div class="grid grid-cols-2 gap-4 items-center">
+                <label class="text-right label">Meal (Optional)</label>
+                <div>{{ form.meal }}</div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="grid grid-cols-2 gap-4 items-center">
+                <div></div> <!-- empty cell for alignment -->
+                <button type="submit" class="btn btn-primary">Add Portion</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
