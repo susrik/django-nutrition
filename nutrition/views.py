@@ -73,7 +73,7 @@ def day(request, day_str):
 class PortionForm(forms.ModelForm):
     class Meta:
         model = Portion
-        fields = ['date', 'quantity', 'food', 'meal']
+        fields = ['date', 'quantity', 'food', 'meal', 'note']
         widgets = {
             'date': forms.DateInput(attrs={
                   # DaisyUI input styling
@@ -82,7 +82,7 @@ class PortionForm(forms.ModelForm):
             'quantity': forms.NumberInput(attrs={
                   # DaisyUI input styling
                 'class': 'input input-bordered w-full max-w-xs',
-                'step': 0.1}),
+                'step': 0.01}),
             'food': forms.Select(attrs={
                 # DaisyUI select style
                 'class': 'select select-bordered w-full max-w-xs',
@@ -91,9 +91,10 @@ class PortionForm(forms.ModelForm):
                 # DaisyUI select style
                 'class': 'select select-bordered w-full max-w-xs',
             }),
-
-
-        
+            'note': forms.TextInput(attrs={
+                # DaisyUI input styling
+                'class': 'input input-bordered w-full max-w-xs',
+            }),
           }
 
 def add_portion(request):
