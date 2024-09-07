@@ -1,9 +1,11 @@
 from typing import Iterable, List
 from django.http import HttpResponse
 from django.utils import timezone
+from django import forms
 from .models import Portion, Food, Meal
 from django.views import generic
 from django.template import loader
+from django.shortcuts import render, redirect
 
 
 class MealTotal:
@@ -66,3 +68,28 @@ def day(request, day_str):
         'calories': sum(m.calories for m in meals)
     }
     return HttpResponse(template.render(context, request))
+
+
+class PortionForm(forms.ModelForm):
+    class Meta:
+        model = Portion
+        fields = ['date', 'quantity', 'food', 'meal']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'quantity': forms.NumberInput(attrs={'step': 0.1}),
+        }
+
+def add_portion(request):
+    default_date = request.GET.get('date', timezone.now().date())
+
+    if request.method == 'POST':
+        form = PortionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            selected_date = form.cleaned_data['date']
+            day_str = selected_date.strftime('%Y-%m-%d')
+            return redirect('day', day_str=day_str)
+    else:
+        form = PortionForm(initial={'date': default_date})
+    
+    return render(request, 'nutrition/add_portion.html', {'form': form})

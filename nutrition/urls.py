@@ -6,4 +6,5 @@ urlpatterns = [
   path('', views.index, name='index'),
   path('days/', views.DaysView.as_view(), name='days'),
   path('day/<str:day_str>', views.day, name='day'),
+  path('add-portion/', views.add_portion, name='add_portion'),
 ]
