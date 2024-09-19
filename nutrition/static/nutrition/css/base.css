@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.days {
+    @apply table w-full max-w-[400px] border border-gray-300 rounded-lg;
+}
+
+.days th {
+    @apply bg-yellow-500 text-white rounded-t-lg;
+}
+
+.days td {
+    @apply border-t;
+}
+
+
 .meal {
-    @apply table w-full border border-gray-300 rounded-lg;
+    @apply table w-full max-w-[200px] border border-gray-300 rounded-lg;
 }
 
 .meal th {
