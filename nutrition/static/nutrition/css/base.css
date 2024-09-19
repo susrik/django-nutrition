@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom table styles */
+.meal-table {
+    border: 2px solid #3b82f6; /* Blue border (Tailwind's blue-500 color) */
+    border-radius: 8px; /* Rounded corners */
+    width: 100%;
+    max-width: 600px; /* Set specific width */
+    margin-top: 0.5rem; /* Tailwind's mt-2 equivalent */
+}
+
+.meal-header {
+    border-bottom: 1px solid #d1d5db; /* Gray border (Tailwind's gray-300 color) */
+}
+
+.meal-cell {
+    padding: 0.5rem 1rem; /* Tailwind's px-4 py-2 equivalent */
+}
