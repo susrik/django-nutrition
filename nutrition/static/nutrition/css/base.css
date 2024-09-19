@@ -2,19 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom table styles */
-.meal-table {
-    border: 2px solid #3b82f6; /* Blue border (Tailwind's blue-500 color) */
-    border-radius: 8px; /* Rounded corners */
-    width: 100%;
-    max-width: 600px; /* Set specific width */
-    margin-top: 0.5rem; /* Tailwind's mt-2 equivalent */
+.meal {
+    @apply table w-full border border-gray-300 rounded-lg;
 }
 
-.meal-header {
-    border-bottom: 1px solid #d1d5db; /* Gray border (Tailwind's gray-300 color) */
+.meal th {
+    @apply bg-blue-500 text-white rounded-t-lg;
 }
 
-.meal-cell {
-    padding: 0.5rem 1rem; /* Tailwind's px-4 py-2 equivalent */
+.meal td {
+    @apply border-t;
+}
+
+.day {
+    @apply table w-full border border-gray-300 rounded-lg;
+}
+
+.day th {
+    @apply bg-green-500 text-white rounded-t-lg;
+}
+
+.day td {
+    @apply border-t;
+}
+
+.portions {
+    @apply table w-full border border-gray-300 rounded-lg;
+}
+
+.portions th {
+    @apply bg-pink-500 text-white rounded-t-lg;
+}
+
+.portions td {
+    @apply border-t;
 }
