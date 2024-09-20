@@ -1,11 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Calories</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
     <script>
         function toggleSubtable(meal_name) {
             const subtable = document.getElementById('subtable-' + meal_name);
@@ -16,28 +16,29 @@
 <body>
 
 <div class="container mx-auto mt-10">
-    <h1 class="text-2xl font-bold mb-4">DaisyUI Table</h1>
+    <h1 class="text-2xl font-bold mb-4">Calories Calendar (Table)</h1>
 
     <div class="overflow-x-auto">
-        <table class="table w-full">
+        <table class="nutrition days">
             <!-- Table Head -->
             <thead>
                 <tr>
-                    <th class="px-4 py-2">Food</th>
-                    <th class="px-4 py-2">Calories</th>
+                    <th>Food</th>
+                    <th>Calories</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for d in days %}
-                <tr class="hover cursor-pointer" onclick="toggleSubtable('{{ d.date }}')">
-                    <td class="px-4 py-2">{{ d.date }}</td>
-                    <td class="px-4 py-2">{{ d.calories }}</td>
-                    <td class="px-4 py-2">
+                <tr class="hover cursor-pointer {%cycle 'row-even' 'row-odd' %}" onclick="toggleSubtable('{{ d.date }}')">
+                    <td>{{ d.date }}</td>
+                    <td>{{ d.calories }}</td>
+                    <td>
                         <a href="{% url 'day' d.date %}" class="text-blue-500 underline">Details</a>
                     </td>
                 </tr>
                 <tr id="subtable-{{ d.date }}" class="hidden">
-                    <td colspan="2">
+                    <td colspan="3">
                         <div class="overflow-x-auto">
                             {% include 'nutrition/meals.html' with meals=d.meals %}
                         </div>

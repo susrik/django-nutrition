@@ -1,4 +1,4 @@
-<table class="table w-full mt-2">
+<table class="nutrition meal">
     <thead>
         <tr>
             <th class="px-4 py-2">Name</th>
@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         {% for m in meals %}
-        <tr>
+        <tr class="{%cycle 'row-even' 'row-odd' %}">
             <td class="px-4 py-2">{{ m.name }}</td>
             <td class="px-4 py-2">{{ m.calories }}</td>
         </tr>
