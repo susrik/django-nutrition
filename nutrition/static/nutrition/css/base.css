@@ -17,11 +17,11 @@
 } */
 
 .row-even  {
-    @apply bg-yellow-100;
+    /* @apply bg-yellow-100; */
 }
 
 .row-odd {
-    @apply bg-gray-100;
+    @apply bg-gray-50;
 }
 
 .days {

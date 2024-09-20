@@ -1843,14 +1843,13 @@ html {
     @apply border-t;
 } */
 
-.row-even {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 249 195 / var(--tw-bg-opacity));
+.row-even  {
+  /* @apply bg-yellow-100; */
 }
 
 .row-odd {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 .days {
