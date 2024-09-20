@@ -19,7 +19,7 @@
     <h1 class="text-2xl font-bold mb-4">Calories Calendar (Table)</h1>
 
     <div class="overflow-x-auto">
-        <table class="days">
+        <table class="nutrition days">
             <!-- Table Head -->
             <thead>
                 <tr>
@@ -30,7 +30,7 @@
             </thead>
             <tbody>
                 {% for d in days %}
-                <tr class="hover cursor-pointer" onclick="toggleSubtable('{{ d.date }}')">
+                <tr class="hover cursor-pointer {%cycle 'row-even' 'row-odd' %}" onclick="toggleSubtable('{{ d.date }}')">
                     <td>{{ d.date }}</td>
                     <td>{{ d.calories }}</td>
                     <td>

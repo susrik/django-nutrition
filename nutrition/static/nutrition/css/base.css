@@ -2,51 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+.nutrition {
+    @apply table w-full max-w-[400px];
+    /* @apply table w-full max-w-[400px] border border-gray-300 rounded-lg; */
+}
+
+.nutrition th {
+    /* @apply bg-yellow-500 text-white rounded-t-lg; */
+    @apply font-bold;
+}
+
+/* .nutrition td {
+    @apply border-t;
+} */
+
+.row-even  {
+    @apply bg-yellow-100;
+}
+
+.row-odd {
+    @apply bg-gray-100;
+}
+
 .days {
-    @apply table w-full max-w-[400px] border border-gray-300 rounded-lg;
-}
-
-.days th {
-    @apply bg-yellow-500 text-white rounded-t-lg;
-}
-
-.days td {
-    @apply border-t;
-}
-
-
-.meal {
-    @apply table w-full max-w-[200px] border border-gray-300 rounded-lg;
-}
-
-.meal th {
-    @apply bg-blue-500 text-white rounded-t-lg;
-}
-
-.meal td {
-    @apply border-t;
+    @apply max-w-[400px];
 }
 
 .day {
-    @apply table w-full border border-gray-300 rounded-lg;
+    @apply max-w-[400px];
 }
 
-.day th {
-    @apply bg-green-500 text-white rounded-t-lg;
-}
-
-.day td {
-    @apply border-t;
+.meal {
+    @apply max-w-[200px];
 }
 
 .portions {
-    @apply table w-full border border-gray-300 rounded-lg;
+    @apply max-w-[300px];
 }
 
-.portions th {
-    @apply bg-pink-500 text-white rounded-t-lg;
-}
-
-.portions td {
-    @apply border-t;
-}

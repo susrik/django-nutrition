@@ -21,7 +21,7 @@
 
     <div class="overflow-x-auto">
         <a href="{% url 'add_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
-        <table class="day">
+        <table class="nutrition day">
             <!-- Table Head -->
             <thead>
                 <tr>
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 {% for m in meals %}
-                <tr class="hover cursor-pointer" onclick="toggleSubtable('{{ m.name }}')">
+                <tr class="hover cursor-pointer {%cycle 'row-even' 'row-odd' %}" onclick="toggleSubtable('{{ m.name }}')">
                     <td class="px-4 py-2">{{ m.name }}</td>
                     <td class="px-4 py-2">{{ m.calories }}</td>
                 </tr>

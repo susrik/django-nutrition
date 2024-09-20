@@ -1751,13 +1751,13 @@ html {
 }
 
 @media (hover:hover) {
-  .days tr.hover:hover,.days tr.hover:nth-child(even):hover {
+  .nutrition tr.hover:hover,.nutrition tr.hover:nth-child(even):hover {
     --tw-bg-opacity: 1;
     background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
   }
 }
 
-.days {
+.nutrition {
   position: relative;
   width: 100%;
   border-radius: var(--rounded-box, 1rem);
@@ -1766,7 +1766,7 @@ html {
   line-height: 1.25rem;
 }
 
-.days :where(.table-pin-rows thead tr) {
+.nutrition :where(.table-pin-rows thead tr) {
   position: sticky;
   top: 0px;
   z-index: 1;
@@ -1774,7 +1774,7 @@ html {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
-.days :where(.table-pin-rows tfoot tr) {
+.nutrition :where(.table-pin-rows tfoot tr) {
   position: sticky;
   bottom: 0px;
   z-index: 1;
@@ -1782,7 +1782,7 @@ html {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
-.days :where(.table-pin-cols tr th) {
+.nutrition :where(.table-pin-cols tr th) {
   position: sticky;
   left: 0px;
   right: 0px;
@@ -1790,11 +1790,11 @@ html {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
-.days:where([dir="rtl"], [dir="rtl"] *) {
+.nutrition:where([dir="rtl"], [dir="rtl"] *) {
   text-align: right;
 }
 
-.days :where(th, td) {
+.nutrition :where(th, td) {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.75rem;
@@ -1802,18 +1802,18 @@ html {
   vertical-align: middle;
 }
 
-.days tr.active,.days tr.active:nth-child(even) {
+.nutrition tr.active,.nutrition tr.active:nth-child(even) {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
 }
 
-.days :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
+.nutrition :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
   border-bottom-width: 1px;
   --tw-border-opacity: 1;
   border-bottom-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
 }
 
-.days :where(thead, tfoot) {
+.nutrition :where(thead, tfoot) {
   white-space: nowrap;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1821,329 +1821,51 @@ html {
   color: var(--fallback-bc,oklch(var(--bc)/0.6));
 }
 
-.days :where(tfoot) {
+.nutrition :where(tfoot) {
   border-top-width: 1px;
   --tw-border-opacity: 1;
   border-top-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
 }
 
-.days {
+.nutrition {
   display: table;
   width: 100%;
   max-width: 400px;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  /* @apply table w-full max-w-[400px] border border-gray-300 rounded-lg; */
 }
 
-.days th {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.days td {
-  border-top-width: 1px;
-}
-
-@media (hover:hover) {
-  .meal tr.hover:hover,.meal tr.hover:nth-child(even):hover {
-    --tw-bg-opacity: 1;
-    background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-  }
-}
-
-.meal {
-  position: relative;
-  width: 100%;
-  border-radius: var(--rounded-box, 1rem);
-  text-align: left;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.meal :where(.table-pin-rows thead tr) {
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.meal :where(.table-pin-rows tfoot tr) {
-  position: sticky;
-  bottom: 0px;
-  z-index: 1;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.meal :where(.table-pin-cols tr th) {
-  position: sticky;
-  left: 0px;
-  right: 0px;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.meal:where([dir="rtl"], [dir="rtl"] *) {
-  text-align: right;
-}
-
-.meal :where(th, td) {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  vertical-align: middle;
-}
-
-.meal tr.active,.meal tr.active:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-}
-
-.meal :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
-  border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-bottom-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-}
-
-.meal :where(thead, tfoot) {
-  white-space: nowrap;
-  font-size: 0.75rem;
-  line-height: 1rem;
+.nutrition th {
+  /* @apply bg-yellow-500 text-white rounded-t-lg; */
   font-weight: 700;
-  color: var(--fallback-bc,oklch(var(--bc)/0.6));
 }
 
-.meal :where(tfoot) {
-  border-top-width: 1px;
-  --tw-border-opacity: 1;
-  border-top-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
+/* .nutrition td {
+    @apply border-t;
+} */
+
+.row-even {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 249 195 / var(--tw-bg-opacity));
+}
+
+.row-odd {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.days {
+  max-width: 400px;
+}
+
+.day {
+  max-width: 400px;
 }
 
 .meal {
-  display: table;
-  width: 100%;
   max-width: 200px;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
-.meal th {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.meal td {
-  border-top-width: 1px;
-}
-
-@media (hover:hover) {
-  .day tr.hover:hover,.day tr.hover:nth-child(even):hover {
-    --tw-bg-opacity: 1;
-    background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-  }
-}
-
-.day {
-  position: relative;
-  width: 100%;
-  border-radius: var(--rounded-box, 1rem);
-  text-align: left;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.day :where(.table-pin-rows thead tr) {
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.day :where(.table-pin-rows tfoot tr) {
-  position: sticky;
-  bottom: 0px;
-  z-index: 1;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.day :where(.table-pin-cols tr th) {
-  position: sticky;
-  left: 0px;
-  right: 0px;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.day:where([dir="rtl"], [dir="rtl"] *) {
-  text-align: right;
-}
-
-.day :where(th, td) {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  vertical-align: middle;
-}
-
-.day tr.active,.day tr.active:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-}
-
-.day :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
-  border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-bottom-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-}
-
-.day :where(thead, tfoot) {
-  white-space: nowrap;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 700;
-  color: var(--fallback-bc,oklch(var(--bc)/0.6));
-}
-
-.day :where(tfoot) {
-  border-top-width: 1px;
-  --tw-border-opacity: 1;
-  border-top-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-}
-
-.day {
-  display: table;
-  width: 100%;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
-.day th {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.day td {
-  border-top-width: 1px;
-}
-
-@media (hover:hover) {
-  .portions tr.hover:hover,.portions tr.hover:nth-child(even):hover {
-    --tw-bg-opacity: 1;
-    background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-  }
 }
 
 .portions {
-  position: relative;
-  width: 100%;
-  border-radius: var(--rounded-box, 1rem);
-  text-align: left;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  max-width: 300px;
 }
 
-.portions :where(.table-pin-rows thead tr) {
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.portions :where(.table-pin-rows tfoot tr) {
-  position: sticky;
-  bottom: 0px;
-  z-index: 1;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.portions :where(.table-pin-cols tr th) {
-  position: sticky;
-  left: 0px;
-  right: 0px;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-}
-
-.portions:where([dir="rtl"], [dir="rtl"] *) {
-  text-align: right;
-}
-
-.portions :where(th, td) {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  vertical-align: middle;
-}
-
-.portions tr.active,.portions tr.active:nth-child(even) {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-}
-
-.portions :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
-  border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-bottom-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-}
-
-.portions :where(thead, tfoot) {
-  white-space: nowrap;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 700;
-  color: var(--fallback-bc,oklch(var(--bc)/0.6));
-}
-
-.portions :where(tfoot) {
-  border-top-width: 1px;
-  --tw-border-opacity: 1;
-  border-top-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-}
-
-.portions {
-  display: table;
-  width: 100%;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
-
-.portions th {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(236 72 153 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.portions td {
-  border-top-width: 1px;
-}
