@@ -2,8 +2,7 @@ from typing import Iterable, List
 from django.http import HttpResponse
 from django.utils import timezone
 from django import forms
-from .models import Portion, Food, Meal
-from .api import MealTotal, DayTotal
+from . import api, models
 from django.views import generic
 from django.template import loader
 from django.shortcuts import render, redirect
@@ -19,12 +18,12 @@ class DaysView(generic.ListView):
 
     def get_queryset(self):
         start_date = timezone.now() - timezone.timedelta(weeks=4)
-        _days = DayTotal.split_days(Portion.objects.filter(date__gte=start_date))
+        _days = api.DayTotal.split_days(models.Portion.objects.filter(date__gte=start_date))
         return sorted(_days, key=lambda d: d.date, reverse=True)
 
 
 def day(request, day_str):
-    meals = MealTotal.split_portions(Portion.objects.filter(date=day_str))
+    meals = api.MealTotal.split_portions(models.Portion.objects.filter(date=day_str))
     template = loader.get_template("nutrition/day.html")
     context = {
         'meals': meals,
@@ -36,7 +35,7 @@ def day(request, day_str):
 
 class PortionForm(forms.ModelForm):
     class Meta:
-        model = Portion
+        model = models.Portion
         fields = ['date', 'quantity', 'food', 'meal', 'note']
         widgets = {
             'date': forms.DateInput(attrs={
@@ -83,5 +82,5 @@ class DaysView(generic.ListView):
 
     def get_queryset(self):
         start_date = timezone.now() - timezone.timedelta(weeks=4)
-        _days = DayTotal.split_days(Portion.objects.filter(date__gte=start_date))
+        _days = api.DayTotal.split_days(models.Portion.objects.filter(date__gte=start_date))
         return sorted(_days, key=lambda d: d.date, reverse=True)
