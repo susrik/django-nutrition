@@ -1,0 +1,17 @@
+{% load static %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: '/nutrition/api/events/',       // Fetch events from the Django API endpoint
+        // eventColor: '#378006',        // Optional: Change event color   
+    });
+      calendar.render();
+    //   calendar.on('dateClick', function(info) {
+    //     console.log('clicked on ' + JSON.stringify(info));
+    // });
+    });
+</script>
+
+<div id='calendar'></div>
