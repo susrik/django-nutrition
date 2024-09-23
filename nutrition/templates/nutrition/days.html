@@ -7,9 +7,45 @@
     <title>Daily Calories</title>
     <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+
+        function showTab(tabId) {
+                // Hide all content
+                document.getElementById('days_table').classList.add('hidden');
+                document.getElementById('days_calendar').classList.add('hidden');
+
+                // Remove active class from all tabs
+                document.getElementById('table_tab').classList.remove('tab-active');
+                document.getElementById('calendar_tab').classList.remove('tab-active');
+
+                // Show the selected tab content and set tab as active
+                if (tabId === 'days_table') {
+                    document.getElementById('days_table').classList.remove('hidden');
+                    document.getElementById('table_tab').classList.add('tab-active');
+                } else {
+                    document.getElementById('days_calendar').classList.remove('hidden');
+                    document.getElementById('calendar_tab').classList.add('tab-active');
+                }
+            }
+    </script>
 </head>
 <body>
-    {% include 'nutrition/days-calendar.html' %}
-    <!-- {% include 'nutrition/days-table.html' %} -->
+
+    <div class="container mx-auto p-4">
+        <!-- Tab Navigation -->
+        <div role="tablist" class="tabs tabs-bordered">
+            <a role="tab" class="tab tab-active" id="calendar_tab" onclick="showTab('days_calendar')">Calendar View</a>
+            <div id="days_calendar" class="tab-content">
+                {% include 'nutrition/days-calendar.html' %}
+            </div>
+
+            <a role="tab" class="tab" id="table_tab" onclick="showTab('days_table')">Table View</a>
+            <div id="days_table" class="tab-content hidden">
+                {% include 'nutrition/days-table.html' %}
+            </div>
+        </div>
+        </div>
+     </div>
+
 </body>
 </html>
