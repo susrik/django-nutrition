@@ -6,50 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Calories</title>
     <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <script>
-        function toggleSubtable(meal_name) {
-            const subtable = document.getElementById('subtable-' + meal_name);
-            subtable.classList.toggle('hidden');
-        }
+
+        function showTab(tabId) {
+                // Hide all content
+                document.getElementById('days_table').classList.add('hidden');
+                document.getElementById('days_calendar').classList.add('hidden');
+
+                // Remove active class from all tabs
+                document.getElementById('table_tab').classList.remove('tab-active');
+                document.getElementById('calendar_tab').classList.remove('tab-active');
+
+                // Show the selected tab content and set tab as active
+                if (tabId === 'days_table') {
+                    document.getElementById('days_table').classList.remove('hidden');
+                    document.getElementById('table_tab').classList.add('tab-active');
+                } else {
+                    document.getElementById('days_calendar').classList.remove('hidden');
+                    document.getElementById('calendar_tab').classList.add('tab-active');
+                }
+            }
     </script>
 </head>
 <body>
 
-<div class="container mx-auto mt-10">
-    <h1 class="text-2xl font-bold mb-4">Calories Calendar (Table)</h1>
+    <div class="container mx-auto p-4">
+        <!-- Tab Navigation -->
+        <div role="tablist" class="tabs tabs-lifted">
+            <input
+                type="radio"
+                name="view_tabs"
+                role="tab"
+                class="tab"
+                aria-label="Calendar"
+                checked="checked" />
 
-    <div class="overflow-x-auto">
-        <table class="nutrition days">
-            <!-- Table Head -->
-            <thead>
-                <tr>
-                    <th>Food</th>
-                    <th>Calories</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for d in days %}
-                <tr class="hover cursor-pointer {%cycle 'row-even' 'row-odd' %}" onclick="toggleSubtable('{{ d.date }}')">
-                    <td>{{ d.date }}</td>
-                    <td>{{ d.calories }}</td>
-                    <td>
-                        <a href="{% url 'day' d.date %}" class="text-blue-500 underline">Details</a>
-                    </td>
-                </tr>
-                <tr id="subtable-{{ d.date }}" class="hidden">
-                    <td colspan="3">
-                        <div class="overflow-x-auto">
-                            {% include 'nutrition/meals.html' with meals=d.meals %}
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <div role="tabpanel" class="tab-content">
+                {% include 'nutrition/days-calendar.html' %}
+            </div>
+
+            <input
+                type="radio"
+                name="view_tabs"
+                role="tab"
+                class="tab"
+                aria-label="Table" />
+
+            <div role="tabpanel" class="tab-content hidden">
+                {% include 'nutrition/days-table.html' %}
+            </div>
+        </div>
     </div>
-    <a href="{% url 'add_portion' %}" class="text-blue-500 underline">New Portion</a>
-</div>
 
 </body>
 </html>

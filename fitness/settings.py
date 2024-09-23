@@ -142,3 +142,10 @@ INTERNAL_IPS = [
     '127.0.0.1',
     'localhost'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        # Default for API responses
+        'rest_framework.renderers.JSONRenderer',
+    ],
+}
