@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
 </head>
 <body>
-    <h1 class="text-2xl font-bold mb-4">New Portion</h1>
+
+    <div class="container mx-auto p-4">
+        User: {{ user.get_username }}
+    </div>
 
     <div class="container mx-auto py-8">
+
+        <h1 class="text-2xl font-bold mb-4">New Portion</h1>
 
         <form method="post" class="space-y-4">
             {% csrf_token %}

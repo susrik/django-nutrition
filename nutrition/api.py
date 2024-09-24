@@ -7,7 +7,8 @@ from . import models
 # from django.views import generic
 # from django.template import loader
 # from django.shortcuts import render, redirect
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import serializers
 
@@ -74,6 +75,7 @@ class FullDayEventSerializer(serializers.Serializer):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def days(request):
 
     start = request.query_params.get('start', None)
@@ -91,6 +93,6 @@ def days(request):
         end_date = timezone.now()
 
     _days = DayTotal.split_days(models.Portion.objects.filter(
-        date__gte=start_date, date__lte=end_date))
+        date__gte=start_date, date__lte=end_date, user=request.user))
     serializer = FullDayEventSerializer(map(FullDayEvent, _days), many=True)
     return Response(serializer.data)

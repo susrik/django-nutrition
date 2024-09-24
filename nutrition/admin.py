@@ -3,7 +3,7 @@ from .models import Food, Meal, Portion
 
 
 class PortionAdmin(admin.ModelAdmin):
-    list_display = ('date', 'food', 'quantity', 'meal')
+    list_display = ('date', 'food', 'quantity', 'meal', 'user')
     list_filter = ['date']
 
 

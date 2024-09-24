@@ -15,6 +15,10 @@
 </head>
 <body>
 <div class="container mx-auto mt-10">
+    <div class="container mx-auto p-4">
+        User: {{ user.get_username }}
+    </div>
+
     <h1 class="text-2xl font-bold mb-4">Meals {{ date }}</h1>
     <h2 class="text-2xl font-bold mb-4">Total kcal: {{ calories }}</h2>
     <a href="{% url 'days' %}" class="text-blue-500 underline">Back to Calendar</a>

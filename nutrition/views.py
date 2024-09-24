@@ -63,18 +63,29 @@ class PortionForm(forms.ModelForm):
             }),
           }
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        assert user  # sanity (should always be logged in here)
+        super(PortionForm, self).__init__(*args, **kwargs)
+        self.fields['food'].queryset = models.Food.objects.filter(user=user)
+        self.fields['meal'].queryset = models.Meal.objects.filter(user=user)
+
+
 @login_required
 def add_portion(request):
     default_date = request.GET.get('date', timezone.now().date())
 
     if request.method == 'POST':
-        form = PortionForm(request.POST)
+        form = PortionForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
+            portion_instance = form.save(commit=False)
+            portion_instance.user = request.user
+            portion_instance.save()
+
             selected_date = form.cleaned_data['date']
             day_str = selected_date.strftime('%Y-%m-%d')
             return redirect('day', day_str=day_str)
     else:
-        form = PortionForm(initial={'date': default_date})
+        form = PortionForm(initial={'date': default_date}, user=request.user)
     
     return render(request, 'nutrition/add_portion.html', {'form': form})
