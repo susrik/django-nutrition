@@ -6,6 +6,7 @@ from . import api, models
 from django.views import generic
 from django.template import loader
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -23,6 +24,7 @@ class DaysView(LoginRequiredMixin, generic.ListView):
         return sorted(_days, key=lambda d: d.date, reverse=True)
 
 
+@login_required
 def day(request, day_str):
     meals = api.MealTotal.split_portions(models.Portion.objects.filter(date=day_str))
     template = loader.get_template("nutrition/day.html")
@@ -61,6 +63,7 @@ class PortionForm(forms.ModelForm):
             }),
           }
 
+@login_required
 def add_portion(request):
     default_date = request.GET.get('date', timezone.now().date())
 
@@ -75,13 +78,3 @@ def add_portion(request):
         form = PortionForm(initial={'date': default_date})
     
     return render(request, 'nutrition/add_portion.html', {'form': form})
-
-
-class DaysView(generic.ListView):
-    template_name = 'nutrition/days.html'
-    context_object_name = 'days'
-
-    def get_queryset(self):
-        start_date = timezone.now() - timezone.timedelta(weeks=4)
-        _days = api.DayTotal.split_days(models.Portion.objects.filter(date__gte=start_date))
-        return sorted(_days, key=lambda d: d.date, reverse=True)
