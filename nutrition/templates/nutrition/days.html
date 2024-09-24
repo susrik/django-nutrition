@@ -7,7 +7,7 @@
     <title>Daily Calories</title>
     <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script>
+    <!-- <script>
 
         function showTab(tabId) {
                 // Hide all content
@@ -27,9 +27,16 @@
                     document.getElementById('calendar_tab').classList.add('tab-active');
                 }
             }
-    </script>
+    </script> -->
 </head>
 <body>
+
+    <div class="container mx-auto p-4">
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out '{{ user.get_username }}'</li></button>
+    </form>
+    </div>
 
     <div class="container mx-auto p-4">
         <!-- Tab Navigation -->

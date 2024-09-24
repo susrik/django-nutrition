@@ -6,13 +6,14 @@ from . import api, models
 from django.views import generic
 from django.template import loader
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
   return HttpResponse('nutrition index')
 
 
-class DaysView(generic.ListView):
+class DaysView(LoginRequiredMixin, generic.ListView):
     template_name = 'nutrition/days.html'
     context_object_name = 'days'
 
