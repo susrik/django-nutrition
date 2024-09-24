@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Food(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)  # Allow nulls initially
     name = models.CharField(max_length=200)
     calories = models.FloatField()
 
@@ -11,6 +13,7 @@ class Food(models.Model):
 
 
 class Meal(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)  # Allow nulls initially
     name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -18,6 +21,7 @@ class Meal(models.Model):
 
 
 class Portion(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)  # Allow nulls initially
     date = models.DateField(default=timezone.now)
     quantity = models.FloatField(default=1)
     note = models.CharField(max_length=200, blank=True)
