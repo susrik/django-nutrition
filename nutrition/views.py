@@ -6,13 +6,15 @@ from . import api, models
 from django.views import generic
 from django.template import loader
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
   return HttpResponse('nutrition index')
 
 
-class DaysView(generic.ListView):
+class DaysView(LoginRequiredMixin, generic.ListView):
     template_name = 'nutrition/days.html'
     context_object_name = 'days'
 
@@ -22,6 +24,7 @@ class DaysView(generic.ListView):
         return sorted(_days, key=lambda d: d.date, reverse=True)
 
 
+@login_required
 def day(request, day_str):
     meals = api.MealTotal.split_portions(models.Portion.objects.filter(date=day_str))
     template = loader.get_template("nutrition/day.html")
@@ -60,27 +63,29 @@ class PortionForm(forms.ModelForm):
             }),
           }
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        assert user  # sanity (should always be logged in here)
+        super(PortionForm, self).__init__(*args, **kwargs)
+        self.fields['food'].queryset = models.Food.objects.filter(user=user)
+        self.fields['meal'].queryset = models.Meal.objects.filter(user=user)
+
+
+@login_required
 def add_portion(request):
     default_date = request.GET.get('date', timezone.now().date())
 
     if request.method == 'POST':
-        form = PortionForm(request.POST)
+        form = PortionForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
+            portion_instance = form.save(commit=False)
+            portion_instance.user = request.user
+            portion_instance.save()
+
             selected_date = form.cleaned_data['date']
             day_str = selected_date.strftime('%Y-%m-%d')
             return redirect('day', day_str=day_str)
     else:
-        form = PortionForm(initial={'date': default_date})
+        form = PortionForm(initial={'date': default_date}, user=request.user)
     
     return render(request, 'nutrition/add_portion.html', {'form': form})
-
-
-class DaysView(generic.ListView):
-    template_name = 'nutrition/days.html'
-    context_object_name = 'days'
-
-    def get_queryset(self):
-        start_date = timezone.now() - timezone.timedelta(weeks=4)
-        _days = api.DayTotal.split_days(models.Portion.objects.filter(date__gte=start_date))
-        return sorted(_days, key=lambda d: d.date, reverse=True)
