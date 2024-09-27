@@ -1,27 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}--set title--{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
-    {% block extra_header_content %}{% endblock %}
-</head>
-<body>
+{% extends 'nutrition/base-simple.html' %}
 
-    <header>
-        {% include 'nutrition/header.html' %}
-    </header>
 
-    <main>
-        {% block content %}
-        <!-- This content will be replaced by specific views -->
-        {% endblock %}
-    </main>
-
- 
-    <footer>  
-    </footer>
-</body>
-</html>
+{% block body_content %}
+  <header>
+{% include 'nutrition/header.html' %}
+  </header>
+  <main>
+{% block content %}{% endblock %}
+  </main>
+{% endblock %}

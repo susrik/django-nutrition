@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}--set title--{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
+    {% block extra_header_content %}{% endblock %}
+</head>
+<body>
+    <h2>Login</h2>
+  
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Renders the login form fields -->
+    
+    <button type="submit">Login</button>
+    </form>
+</body>
+</html>
