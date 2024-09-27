@@ -3,49 +3,84 @@
 {% block title %}Add Portion{% endblock %}
 
 {% block content %}
-    <div class="container mx-auto py-8">
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-md lg:w-1/3 mx-auto">
 
-        <h1 class="text-2xl font-bold mb-4">New Portion</h1>
-
-        <form method="post" class="space-y-4">
+        <!-- Form Container -->
+      <div class="shadow-lg rounded-lg overflow-hidden bg-white">
+        
+        <!-- Blue Bar at the Top -->
+        <div class="bg-blue-500 text-white p-4 text-center">
+          <h2 class="text-lg font-bold">Add Portion</h2>
+        </div>
+  
+        <!-- Error Message (conditionally displayed if there's an error) -->
+        {% if form.errors %}
+            <div class="bg-red-100 border border-red-500 text-red-700 px-4 py-2 my-2 w-full mx-auto">
+          <p>{{ form.non_field_errors }}</p>
+          {% for field in form %}
+              {% for error in field.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Form Fields -->
+        <form method="post" class="p-6 space-y-4">
             {% csrf_token %}
-
+  
             <!-- Date field -->
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <label class="text-right label">Date</label>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Date</span>
+                </label>
                 <div>{{ form.date }}</div>
             </div>
-
-            <!-- Quantity field -->
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <label class="text-right label">Quantity</label>
-                <div>{{ form.quantity }}</div>
-            </div>
-
+            
             <!-- Food field -->
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <label class="text-right label">Food</label>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Food</span>
+                </label>
                 <div>{{ form.food }}</div>
             </div>
 
+            <!-- Quantity field -->
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Quantity</span>
+                </label>
+                <div>{{ form.quantity }}</div>
+            </div>
+            
             <!-- Meal field (optional) -->
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <label class="text-right label">Meal (Optional)</label>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Meal (Optional)</span>
+                </label>
                 <div>{{ form.meal }}</div>
             </div>
 
             <!-- Note field (optional) -->
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <label class="text-right label">Note (Optional)</label>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Note (Optional)</span>
+                </label>
                 <div>{{ form.note }}</div>
             </div>
 
-            <!-- Submit button -->
-            <div class="grid grid-cols-2 gap-4">
+            <!-- Submit Button -->
+            <div class="form-control mt-6">
                 <div class="col-span-2 text-center">
-                    <button type="submit" class="btn btn-primary">Add Portion</button>
+                    <button type="submit" class="btn btn-primary w-full">Add Portion</button>
                 </div>
             </div>
+            
         </form>
+      </div>
     </div>
+  </div>
+
+</div>
 {% endblock %}

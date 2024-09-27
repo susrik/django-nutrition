@@ -1,21 +1,62 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}--set title--{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
-    {% block extra_header_content %}{% endblock %}
-</head>
-<body>
-    <h2>Login</h2>
+{% extends 'nutrition/base-simple.html' %}
+
+{% block title %}Nutrition Login{% endblock %}
+
+{% block body_content %}
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-md lg:w-1/3 mx-auto">
+
+        <!-- Form Container -->
+      <div class="shadow-lg rounded-lg overflow-hidden bg-white">
+        
+        <!-- Blue Bar at the Top -->
+        <div class="bg-blue-500 text-white p-4 text-center">
+          <h2 class="text-lg font-bold">Nutrition Login</h2>
+        </div>
   
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}  <!-- Renders the login form fields -->
-    
-    <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+        <!-- Error Message (conditionally displayed if there's an error) -->
+        {% if form.errors %}
+            <div class="bg-red-100 border border-red-500 text-red-700 px-4 py-2 my-2 w-full mx-auto">
+          <p>{{ form.non_field_errors }}</p>
+          {% for field in form %}
+              {% for error in field.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Form Fields -->
+        <form method="post" class="p-6 space-y-4">
+            {% csrf_token %}
+  
+            <!-- Date field -->
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Username</span>
+                </label>
+                <div>{{ form.username }}</div>
+            </div>
+            
+            <!-- Food field -->
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Password</span>
+                </label>
+                <div>{{ form.password }}</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-control mt-6">
+                <div class="col-span-2 text-center">
+                    <button type="submit" class="btn btn-primary w-full">Nutrition Login</button>
+                </div>
+            </div>
+            
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
