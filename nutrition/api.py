@@ -1,12 +1,8 @@
 from datetime import datetime
 from typing import Iterable, List
-# from django.http import HttpResponse
 from django.utils import timezone
-# from django import forms
+from django.db.models import Model
 from . import models
-# from django.views import generic
-# from django.template import loader
-# from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -50,7 +46,7 @@ class DayTotal:
         return [DayTotal(date, portions) for date, portions in portions_per_day.items()]
 
 class FullDayEvent:
-    def __init__(self, day: DayTotal):
+    def __init__(self, day: DayTotal, over: False):
         self.title = str(int(day.calories + 0.5))
         self.start = day.date
         self.end = day.date
@@ -58,7 +54,7 @@ class FullDayEvent:
         self.description = f'{day.calories} calories'
         # self.display = 'background'
         self.display = 'auto'
-        self.backgroundColor = 'red' if day.calories > 1500 else 'green'
+        self.backgroundColor = 'red' if over else 'green'
         self.textColor = 'white'
         self.url = f'/nutrition/day/{day.date}'
 
@@ -94,5 +90,16 @@ def days(request):
 
     _days = DayTotal.split_days(models.Portion.objects.filter(
         date__gte=start_date, date__lte=end_date, user=request.user))
-    serializer = FullDayEventSerializer(map(FullDayEvent, _days), many=True)
+
+    try:
+        _prefs = models.Preferences.objects.get(user=request.user)
+        _max_calories = _prefs.max_calories or models.Preferences.DEFAULT_MAX_CALORIES
+    except models.Preferences.DoesNotExist:
+        # ok (prefs are optional)
+        _max_calories = models.Preferences.DEFAULT_MAX_CALORIES
+
+    def _make_event(day: DayTotal):
+        return FullDayEvent(day, over=day.calories > _max_calories)
+
+    serializer = FullDayEventSerializer(map(_make_event, _days), many=True)
     return Response(serializer.data)

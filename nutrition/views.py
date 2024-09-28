@@ -8,7 +8,7 @@ from django.template import loader
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.urls import reverse
 
 def index(request):
   return HttpResponse('nutrition index')
@@ -19,6 +19,7 @@ class DaysView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'days'
 
     def get_queryset(self):
+        _preferences = models.Preferences.objects.get(user=self.request.user)
         start_date = timezone.now() - timezone.timedelta(weeks=4)
         _days = api.DayTotal.split_days(models.Portion.objects.filter(date__gte=start_date))
         return sorted(_days, key=lambda d: d.date, reverse=True)
@@ -89,3 +90,37 @@ def add_portion(request):
         form = PortionForm(initial={'date': default_date}, user=request.user)
     
     return render(request, 'nutrition/add_portion.html', {'form': form})
+
+
+class UserPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = models.Preferences
+        fields = ['max_calories',]
+        widgets = {
+            'max_calories': forms.NumberInput(attrs={
+                  # DaisyUI input styling
+                'class': 'input input-bordered w-full max-w-xs',
+                'step': 0.01}),
+          }
+
+    def __init__(self, *args, **kwargs):
+        _prefs = kwargs.get('instance')
+        assert isinstance(_prefs, models.Preferences)  # sanity
+        super(UserPreferencesForm, self).__init__(*args, **kwargs)
+        self.fields['max_calories'].initial = _prefs.max_calories
+
+
+@login_required
+def user_preferences(request):
+
+    preferences, created = models.Preferences.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = UserPreferencesForm(request.POST, instance=preferences)
+        if form.is_valid():
+            form.save()
+            return redirect('days')
+    else:
+        form = UserPreferencesForm(instance=preferences)
+
+    return render(request, 'nutrition/user-preferences.html', {'form': form})
