@@ -1,8 +1,8 @@
-{% extends 'nutrition/base.html' %}
+{% extends 'nutrition/base-simple.html' %}
 
-{% block title %}Add Portion{% endblock %}
+{% block title %}Nutrition Login{% endblock %}
 
-{% block content %}
+{% block body_content %}
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
     <div class="w-full max-w-md lg:w-1/3 mx-auto">
 
@@ -11,7 +11,7 @@
         
         <!-- Blue Bar at the Top -->
         <div class="bg-blue-500 text-white p-4 text-center">
-          <h2 class="text-lg font-bold">Add Portion</h2>
+          <h2 class="text-lg font-bold">Nutrition Login</h2>
         </div>
   
         <!-- Error Message (conditionally displayed if there's an error) -->
@@ -33,47 +33,23 @@
             <!-- Date field -->
             <div class="form-control">
                 <label class="label">
-                    <span class="label-text">Date</span>
+                    <span class="label-text">Username</span>
                 </label>
-                <div>{{ form.date }}</div>
+                <div>{{ form.username }}</div>
             </div>
             
             <!-- Food field -->
             <div class="form-control">
                 <label class="label">
-                    <span class="label-text">Food</span>
+                    <span class="label-text">Password</span>
                 </label>
-                <div>{{ form.food }}</div>
-            </div>
-
-            <!-- Quantity field -->
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Quantity</span>
-                </label>
-                <div>{{ form.quantity }}</div>
-            </div>
-            
-            <!-- Meal field (optional) -->
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Meal (Optional)</span>
-                </label>
-                <div>{{ form.meal }}</div>
-            </div>
-
-            <!-- Note field (optional) -->
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Note (Optional)</span>
-                </label>
-                <div>{{ form.note }}</div>
+                <div>{{ form.password }}</div>
             </div>
 
             <!-- Submit Button -->
             <div class="form-control mt-6">
                 <div class="col-span-2 text-center">
-                    <button type="submit" class="btn btn-primary w-full">Add Portion</button>
+                    <button type="submit" class="btn btn-primary w-full">Nutrition Login</button>
                 </div>
             </div>
             

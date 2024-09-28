@@ -1,0 +1,11 @@
+{% extends 'nutrition/base-simple.html' %}
+
+
+{% block body_content %}
+  <header>
+{% include 'nutrition/header.html' %}
+  </header>
+  <main>
+{% block content %}{% endblock %}
+  </main>
+{% endblock %}

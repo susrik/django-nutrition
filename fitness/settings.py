@@ -150,4 +150,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-LOGIN_REDIRECT_URL = '/nutrition/days'
+LOGIN_REDIRECT_URL = '/nutrition'
