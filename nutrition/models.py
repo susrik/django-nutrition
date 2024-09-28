@@ -1,45 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth.models import User
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from django.http import HttpRequest
-
-AVAILABLE_THEMES = [
-    'light',
-    'dark',
-    'cupcake',
-    'bumblebee',
-    'emerald',
-    'corporate',
-    'synthwave',
-    'retro',
-    'cyberpunk',
-    'valentine',
-    'halloween',
-    'garden',
-    'forest',
-    'aqua',
-    'lofi',
-    'pastel',
-    'fantasy',
-    'wireframe',
-    'black',
-    'luxury',
-    'dracula',
-    'cmyk',
-    'autumn',
-    'business',
-    'acid',
-    'lemonade',
-    'night',
-    'coffee',
-    'winter',
-    'dim',
-    'nord',
-    'sunset',
-]
 
 
 class Food(models.Model):
@@ -133,7 +98,7 @@ class Preferences(models.Model):
             'max_calories': Preferences.DEFAULT_MAX_CALORIES,
             'theme': Preferences.DEFAULT_THEME,
         }
-        if not isinstance(request.user, AnonymousUser):
+        if request.user.is_authenticated:
             try:
                 _prefs = Preferences.objects.get(user=request.user)
                 return_value['max_calories'] = _prefs.max_calories or Preferences.DEFAULT_MAX_CALORIES
