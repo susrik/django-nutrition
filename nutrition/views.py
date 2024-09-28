@@ -19,7 +19,6 @@ class DaysView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'days'
 
     def get_queryset(self):
-        _preferences = models.Preferences.objects.get(user=self.request.user)
         start_date = timezone.now() - timezone.timedelta(weeks=4)
         _days = api.DayTotal.split_days(models.Portion.objects.filter(date__gte=start_date))
         return sorted(_days, key=lambda d: d.date, reverse=True)
