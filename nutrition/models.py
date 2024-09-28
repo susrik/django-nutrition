@@ -33,3 +33,12 @@ class Portion(models.Model):
 
     def __str__(self):
         return f'{self.food.name} ({self.quantity})'
+
+
+class Preferences(models.Model):
+    DEFAULT_MAX_CALORIES = 2000
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    max_calories = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user}, max calories: {self.max_calories}'
