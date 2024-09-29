@@ -29,17 +29,17 @@
                     <td>{{ f.name }}</td>
                     <td>{{ f.calories }}</td>
                     <td>
-                        <a href=""class="text-blue-500 underline">Edit</a>
+                        <a href="{% url 'add_or_edit_food' f.pk %}"class="text-blue-500 underline">Edit</a>
                     </td>
                     <td>
-                        <a href=""class="text-blue-500 underline">Delete</a>
+                        <a href="{% url 'delete_food' f.pk %}"class="text-blue-500 underline">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <!-- <a href="{% url 'add_portion' %}" class="text-blue-500 underline">New Portion</a> -->
+    <a href="{% url 'add_or_edit_food' %}" class="text-blue-500 underline">New Food</a>
 </div>
 
 

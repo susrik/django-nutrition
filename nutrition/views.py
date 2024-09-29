@@ -5,7 +5,7 @@ from django import forms
 from . import api, models
 from django.views import generic
 from django.template import loader
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -135,3 +135,35 @@ class FoodsView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return models.Food.objects.filter(user=self.request.user).order_by('name')
+    
+
+class FoodForm(forms.ModelForm):
+     class Meta:
+        model = models.Food
+        fields = ['name', 'calories']
+
+
+@login_required
+def add_or_edit_food(request, pk=None):
+    _food = get_object_or_404(models.Food, pk=pk) if pk else None    
+    if request.method == 'POST':
+        form = FoodForm(request.POST, instance=_food)
+        if form.is_valid():
+            _food = form.save(commit=False)
+            _food.user = request.user
+            _food.save()
+            return redirect('foods')
+    else:
+        form = FoodForm(instance=_food)
+    
+    return render(request, 'nutrition/food_form.html', {'form': form, 'food': _food})
+
+
+@login_required
+def delete_food(request, pk):
+    item = get_object_or_404(models.Food, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('foods')
+    
+    return render(request, 'nutrition/food_confirm_delete.html', {'item': item})
