@@ -8,7 +8,7 @@ from django.template import loader
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.urls import reverse
 
 class DaysView(LoginRequiredMixin, generic.ListView):
     template_name = 'nutrition/days.html'
@@ -61,18 +61,22 @@ class PortionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
-        assert user  # sanity (should always be logged in here)
+        assert user  # sanity (should always be logged in here & user provided)
         super(PortionForm, self).__init__(*args, **kwargs)
         self.fields['food'].queryset = models.Food.objects.filter(user=user)
         self.fields['meal'].queryset = models.Meal.objects.filter(user=user)
 
 
 @login_required
-def add_portion(request):
-    default_date = request.GET.get('date', timezone.now().date())
+def add_or_edit_portion(request, pk=None):
+
+    _portion = get_object_or_404(models.Portion, pk=pk) if pk else None    
 
     if request.method == 'POST':
-        form = PortionForm(request.POST, user=request.user)
+        form = PortionForm(
+            request.POST,
+            instance=_portion,
+            user=request.user)
         if form.is_valid():
             portion_instance = form.save(commit=False)
             portion_instance.user = request.user
@@ -82,10 +86,25 @@ def add_portion(request):
             day_str = selected_date.strftime('%Y-%m-%d')
             return redirect('day', day_str=day_str)
     else:
-        form = PortionForm(initial={'date': default_date}, user=request.user)
+        default_date = request.GET.get('date', timezone.now().date())
+        form = PortionForm(
+            initial={'date': default_date},
+            instance=_portion,
+            user=request.user)
     
     return render(request, 'nutrition/add_portion.html', {'form': form})
 
+
+@login_required
+def delete_portion(request, pk):
+    _record = get_object_or_404(models.Portion, pk=pk)
+    if request.method == 'POST':
+        portion_date = _record.date
+        _record.delete()
+        return redirect(reverse('day', args=[portion_date]))
+
+    return render(request, 'nutrition/portion_confirm_delete.html', {'portion': _record})
+    
 
 class UserPreferencesForm(forms.ModelForm):
     class Meta:
@@ -155,15 +174,14 @@ def add_or_edit_food(request, pk=None):
             return redirect('foods')
     else:
         form = FoodForm(instance=_food)
-    
     return render(request, 'nutrition/food_form.html', {'form': form, 'food': _food})
 
 
-@login_required
-def delete_food(request, pk):
-    item = get_object_or_404(models.Food, pk=pk)
-    if request.method == 'POST':
-        item.delete()
-        return redirect('foods')
-    
-    return render(request, 'nutrition/food_confirm_delete.html', {'item': item})
+# @login_required
+# def delete_food(request, pk):
+#     item = get_object_or_404(models.Food, pk=pk)
+#     if request.method == 'POST':
+#         item.delete()
+#         return redirect('foods')
+#
+#     return render(request, 'nutrition/food_confirm_delete.html', {'item': item})
