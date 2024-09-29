@@ -44,7 +44,7 @@ class Portion(models.Model):
 class Preferences(models.Model):
 
     DEFAULT_MAX_CALORIES = 2000
-    DEFAULT_THEME = 'retro'
+    DEFAULT_THEME = 'light'
 
     AVAILABLE_THEMES = [
         'light',
