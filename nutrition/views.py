@@ -127,3 +127,7 @@ def user_preferences(request):
         form = UserPreferencesForm(instance=preferences)
 
     return render(request, 'nutrition/user-preferences.html', {'form': form})
+
+
+def style_test(request):
+    return render(request, 'nutrition/style-test.html')
