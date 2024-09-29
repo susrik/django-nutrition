@@ -94,13 +94,17 @@ def add_portion(request):
 class UserPreferencesForm(forms.ModelForm):
     class Meta:
         model = models.Preferences
-        fields = ['max_calories',]
-        widgets = {
-            'max_calories': forms.NumberInput(attrs={
-                  # DaisyUI input styling
-                'class': 'input input-bordered w-full max-w-xs',
-                'step': 0.01}),
-          }
+        fields = ['max_calories', 'theme']
+        # widgets = {
+        #     'max_calories': forms.NumberInput(attrs={
+        #           # DaisyUI input styling
+        #         'class': 'input input-bordered w-full max-w-xs',
+        #         'step': 0.01}),
+        #     'theme': forms.Select(attrs={
+        #         # DaisyUI select style
+        #         'class': 'select select-bordered w-full max-w-xs',
+        #     }),
+        #   }
 
     def __init__(self, *args, **kwargs):
         _prefs = kwargs.get('instance')
@@ -123,3 +127,7 @@ def user_preferences(request):
         form = UserPreferencesForm(instance=preferences)
 
     return render(request, 'nutrition/user-preferences.html', {'form': form})
+
+
+def style_test(request):
+    return render(request, 'nutrition/style-test.html')

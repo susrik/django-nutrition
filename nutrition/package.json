@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "tailwind.config.js",
   "scripts": {
-    "build:css": "npx tailwindcss -c tailwind.config.js -i static/nutrition/css/base.css -o static/nutrition/css/styles.css --minify"
+    "build:css": "npx tailwindcss -c tailwind.config.js -i static/nutrition/css/base.css -o static/nutrition/css/styles.css"
   },
   "keywords": [],
   "author": "",

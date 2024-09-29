@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Iterable, List
+from typing import Iterable, List, TYPE_CHECKING
 from django.utils import timezone
 from django.db.models import Model
 from . import models
@@ -8,6 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import serializers
 
+if TYPE_CHECKING:
+    from django.http import HttpRequest
 
 class MealTotal:
     def __init__(self, name: str, portions: Iterable[models.Portion]):
@@ -72,7 +74,7 @@ class FullDayEventSerializer(serializers.Serializer):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def days(request):
+def days(request: 'HttpRequest'):
 
     start = request.query_params.get('start', None)
     if start:
@@ -91,15 +93,11 @@ def days(request):
     _days = DayTotal.split_days(models.Portion.objects.filter(
         date__gte=start_date, date__lte=end_date, user=request.user))
 
-    try:
-        _prefs = models.Preferences.objects.get(user=request.user)
-        _max_calories = _prefs.max_calories or models.Preferences.DEFAULT_MAX_CALORIES
-    except models.Preferences.DoesNotExist:
-        # ok (prefs are optional)
-        _max_calories = models.Preferences.DEFAULT_MAX_CALORIES
+
+    _prefs = models.Preferences.current_preferences(request)
 
     def _make_event(day: DayTotal):
-        return FullDayEvent(day, over=day.calories > _max_calories)
+        return FullDayEvent(day, over=day.calories > _prefs['max_calories'])
 
     serializer = FullDayEventSerializer(map(_make_event, _days), many=True)
     return Response(serializer.data)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Food, Meal, Portion
+from .models import Food, Meal, Portion, Preferences
 
 
 class PortionAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class PortionAdmin(admin.ModelAdmin):
 admin.site.register(Food)
 admin.site.register(Meal)
 admin.site.register(Portion, PortionAdmin)
+admin.site.register(Preferences)
