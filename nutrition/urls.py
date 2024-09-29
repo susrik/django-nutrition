@@ -5,6 +5,7 @@ from . import views, api
 
 urlpatterns = [
   path('', views.DaysView.as_view(), name='days'),
+  path('foods', views.FoodsView.as_view(), name='foods'),
   path('day/<str:day_str>', views.day, name='day'),
   path('add-portion/', views.add_portion, name='add_portion'),
   path('user-preferences/', views.user_preferences, name='user_preferences'),

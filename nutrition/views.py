@@ -8,10 +8,6 @@ from django.template import loader
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-
-def index(request):
-  return HttpResponse('nutrition index')
 
 
 class DaysView(LoginRequiredMixin, generic.ListView):
@@ -131,3 +127,11 @@ def user_preferences(request):
 
 def style_test(request):
     return render(request, 'nutrition/style-test.html')
+
+
+class FoodsView(LoginRequiredMixin, generic.ListView):
+    template_name = 'nutrition/foods.html'
+    context_object_name = 'foods'
+
+    def get_queryset(self):
+        return models.Food.objects.filter(user=self.request.user).order_by('name')
