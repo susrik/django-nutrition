@@ -17,7 +17,7 @@
     <h2 class="text-2xl font-bold mb-4">Total kcal: {{ calories }}</h2>
 
     <div class="overflow-x-auto">
-        <a href="{% url 'add_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
+        <a href="{% url 'add_or_edit_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
         <table class="nutrition day">
             <!-- Table Head -->
             <thead>
@@ -43,6 +43,6 @@
             </tbody>
         </table>
     </div>
-    <a href="{% url 'add_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
+    <a href="{% url 'add_or_edit_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
 </div>
 {% endblock %}

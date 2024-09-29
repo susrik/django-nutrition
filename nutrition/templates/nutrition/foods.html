@@ -19,7 +19,6 @@
                     <th>Name</th>
                     <th>Calories</th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,9 +28,6 @@
                     <td>{{ f.calories }}</td>
                     <td>
                         <a href="{% url 'add_or_edit_food' f.pk %}"class="text-blue-500 underline">Edit</a>
-                    </td>
-                    <td>
-                        <a href="{% url 'delete_food' f.pk %}"class="text-blue-500 underline">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
