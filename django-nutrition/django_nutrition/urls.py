@@ -9,7 +9,7 @@ urlpatterns = [
   path('day/<str:day_str>', views.day, name='day'),
   path('user-preferences/', views.user_preferences, name='user_preferences'),
   path('api/events/', api.days, name='day-events'),
-  path('login/', auth_views.LoginView.as_view(template_name='nutrition/login.html'), name='nutrition_login'),
+  path('login/', auth_views.LoginView.as_view(template_name='django_nutrition/login.html'), name='nutrition_login'),
   path('style-test/',views.style_test, name='style_test'),
   path('portion/new', views.add_or_edit_portion, name='add_or_edit_portion'),
   path('portion/edit/<int:pk>/', views.add_or_edit_portion, name='add_or_edit_portion'),

@@ -1,4 +1,4 @@
-{% extends 'nutrition/base.html' %}
+{% extends 'django_nutrition/base.html' %}
 
 {% block title %}Meals {{ date }}{% endblock %}
 
@@ -35,7 +35,7 @@
                 <tr id="subtable-{{ m.name }}" class="hidden">
                     <td colspan="2">
                         <div class="overflow-x-auto">
-                            {% include 'nutrition/portions.html' with portions=m.portions %}
+                            {% include 'django_nutrition/portions.html' with portions=m.portions %}
                         </div>
                     </td>
                 </tr>

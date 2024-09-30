@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nutrition', '0003_alter_portion_date'),
+        ('django_nutrition', '0003_alter_portion_date'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='portion',
             name='meal',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='nutrition.meal'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='django_nutrition.meal'),
         ),
     ]

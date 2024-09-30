@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nutrition', '0008_alter_preferences_user'),
+        ('django_nutrition', '0008_alter_preferences_user'),
     ]
 
     operations = [

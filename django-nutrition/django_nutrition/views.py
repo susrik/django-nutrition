@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 class DaysView(LoginRequiredMixin, generic.ListView):
-    template_name = 'nutrition/days.html'
+    template_name = 'django_nutrition/days.html'
     context_object_name = 'days'
 
     def get_queryset(self):
@@ -23,7 +23,7 @@ class DaysView(LoginRequiredMixin, generic.ListView):
 @login_required
 def day(request, day_str):
     meals = api.MealTotal.split_portions(models.Portion.objects.filter(date=day_str))
-    template = loader.get_template("nutrition/day.html")
+    template = loader.get_template('django_nutrition/day.html')
     context = {
         'meals': meals,
         'date': day_str,
@@ -92,7 +92,7 @@ def add_or_edit_portion(request, pk=None):
             instance=_portion,
             user=request.user)
     
-    return render(request, 'nutrition/add_portion.html', {'form': form})
+    return render(request, 'django_nutrition/add_portion.html', {'form': form})
 
 
 @login_required
@@ -103,7 +103,7 @@ def delete_portion(request, pk):
         _record.delete()
         return redirect(reverse('day', args=[portion_date]))
 
-    return render(request, 'nutrition/portion_confirm_delete.html', {'portion': _record})
+    return render(request, 'django_nutrition/portion_confirm_delete.html', {'portion': _record})
     
 
 class UserPreferencesForm(forms.ModelForm):
@@ -141,15 +141,15 @@ def user_preferences(request):
     else:
         form = UserPreferencesForm(instance=preferences)
 
-    return render(request, 'nutrition/user-preferences.html', {'form': form})
+    return render(request, 'django_nutrition/user-preferences.html', {'form': form})
 
 
 def style_test(request):
-    return render(request, 'nutrition/style-test.html')
+    return render(request, 'django_nutrition/style-test.html')
 
 
 class FoodsView(LoginRequiredMixin, generic.ListView):
-    template_name = 'nutrition/foods.html'
+    template_name = 'django_nutrition/foods.html'
     context_object_name = 'foods'
 
     def get_queryset(self):
@@ -174,7 +174,7 @@ def add_or_edit_food(request, pk=None):
             return redirect('foods')
     else:
         form = FoodForm(instance=_food)
-    return render(request, 'nutrition/food_form.html', {'form': form, 'food': _food})
+    return render(request, 'django_nutrition/food_form.html', {'form': form, 'food': _food})
 
 
 # @login_required
@@ -184,4 +184,4 @@ def add_or_edit_food(request, pk=None):
 #         item.delete()
 #         return redirect('foods')
 #
-#     return render(request, 'nutrition/food_confirm_delete.html', {'item': item})
+#     return render(request, 'django_nutrition/food_confirm_delete.html', {'item': item})

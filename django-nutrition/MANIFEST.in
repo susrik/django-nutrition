@@ -1,0 +1,2 @@
+recursive-include django_nutrition/static *
+recursive-include django_nutrition/templates *

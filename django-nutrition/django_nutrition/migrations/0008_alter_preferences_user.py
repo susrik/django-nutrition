@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nutrition', '0007_preferences'),
+        ('django_nutrition', '0007_preferences'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
