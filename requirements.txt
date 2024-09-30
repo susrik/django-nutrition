@@ -1,4 +1,0 @@
-pymysql
-django
-django-debug-toolbar
-djangorestframework
