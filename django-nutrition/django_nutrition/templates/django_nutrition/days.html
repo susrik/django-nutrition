@@ -1,4 +1,4 @@
-{% extends 'nutrition/base.html' %}
+{% extends 'django_nutrition/base.html' %}
 
 {% block title %}Daily Calories{% endblock %}
 
@@ -19,7 +19,7 @@
                 checked="checked" />
 
             <div role="tabpanel" class="tab-content">
-                {% include 'nutrition/days-calendar.html' %}
+                {% include 'django_nutrition/days-calendar.html' %}
             </div>
 
             <input
@@ -30,7 +30,7 @@
                 aria-label="Table" />
 
             <div role="tabpanel" class="tab-content hidden">
-                {% include 'nutrition/days-table.html' %}
+                {% include 'django_nutrition/days-table.html' %}
             </div>
         </div>
     </div>

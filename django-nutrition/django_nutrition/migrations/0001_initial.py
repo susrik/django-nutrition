@@ -35,8 +35,8 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(default=datetime.date(2024, 9, 1))),
                 ('quantity', models.IntegerField(default=1)),
                 ('note', models.CharField(blank=True, max_length=200)),
-                ('food', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='nutrition.food')),
-                ('meal', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='nutrition.meal')),
+                ('food', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='django_nutrition.food')),
+                ('meal', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='django_nutrition.meal')),
             ],
         ),
     ]
