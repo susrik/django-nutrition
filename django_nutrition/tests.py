@@ -10,7 +10,7 @@ from .api import MealTotal
 
 class MealTotalTests(TestCase):
 
-    def __str__(self):
+    def setup(self):
         user = User.objects.create_user('test', '123')
 
         food_100 = Food.objects.create(name='food 100', calories=100, user=user)
