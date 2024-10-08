@@ -36,4 +36,4 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/susrik/fitness"
+Homepage = "https://github.com/susrik/django-nutrition"
