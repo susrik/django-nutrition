@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('django_nutrition', '0001_initial'),
+        ("django_nutrition", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='portion',
-            name='quantity',
+            model_name="portion",
+            name="quantity",
             field=models.FloatField(default=1),
         ),
     ]
