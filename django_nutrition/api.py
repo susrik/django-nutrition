@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import Iterable, List, TYPE_CHECKING
 from django.utils import timezone
-from django.db.models import Model
 from . import models
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
