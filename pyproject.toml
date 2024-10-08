@@ -16,7 +16,7 @@ description = "A Django app to track meals and calories."
 readme = "README.rst"
 requires-python = ">= 3.10"
 authors = [
-    {name = "Erik Reid", email = "merikreid@gmail.com"},
+    {name = "Erik Reid", email = "noreply@no.domain"},
 ]
 classifiers = [
     "Environment :: Web Environment",
