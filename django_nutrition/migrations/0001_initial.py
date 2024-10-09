@@ -6,37 +6,72 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Food',
+            name="Food",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('calories', models.FloatField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("calories", models.FloatField()),
             ],
         ),
         migrations.CreateModel(
-            name='Meal',
+            name="Meal",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
-            name='Portion',
+            name="Portion",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField(default=datetime.date(2024, 9, 1))),
-                ('quantity', models.IntegerField(default=1)),
-                ('note', models.CharField(blank=True, max_length=200)),
-                ('food', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='django_nutrition.food')),
-                ('meal', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='django_nutrition.meal')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField(default=datetime.date(2024, 9, 1))),
+                ("quantity", models.IntegerField(default=1)),
+                ("note", models.CharField(blank=True, max_length=200)),
+                (
+                    "food",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="django_nutrition.food",
+                    ),
+                ),
+                (
+                    "meal",
+                    models.ForeignKey(
+                        blank=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="django_nutrition.meal",
+                    ),
+                ),
             ],
         ),
     ]

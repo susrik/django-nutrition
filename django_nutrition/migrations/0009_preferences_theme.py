@@ -4,15 +4,52 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('django_nutrition', '0008_alter_preferences_user'),
+        ("django_nutrition", "0008_alter_preferences_user"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='preferences',
-            name='theme',
-            field=models.CharField(blank=True, choices=[('light', 'light'), ('dark', 'dark'), ('cupcake', 'cupcake'), ('bumblebee', 'bumblebee'), ('emerald', 'emerald'), ('corporate', 'corporate'), ('synthwave', 'synthwave'), ('retro', 'retro'), ('cyberpunk', 'cyberpunk'), ('valentine', 'valentine'), ('halloween', 'halloween'), ('garden', 'garden'), ('forest', 'forest'), ('aqua', 'aqua'), ('lofi', 'lofi'), ('pastel', 'pastel'), ('fantasy', 'fantasy'), ('wireframe', 'wireframe'), ('black', 'black'), ('luxury', 'luxury'), ('dracula', 'dracula'), ('cmyk', 'cmyk'), ('autumn', 'autumn'), ('business', 'business'), ('acid', 'acid'), ('lemonade', 'lemonade'), ('night', 'night'), ('coffee', 'coffee'), ('winter', 'winter'), ('dim', 'dim'), ('nord', 'nord'), ('sunset', 'sunset')], max_length=200, null=True),
+            model_name="preferences",
+            name="theme",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("light", "light"),
+                    ("dark", "dark"),
+                    ("cupcake", "cupcake"),
+                    ("bumblebee", "bumblebee"),
+                    ("emerald", "emerald"),
+                    ("corporate", "corporate"),
+                    ("synthwave", "synthwave"),
+                    ("retro", "retro"),
+                    ("cyberpunk", "cyberpunk"),
+                    ("valentine", "valentine"),
+                    ("halloween", "halloween"),
+                    ("garden", "garden"),
+                    ("forest", "forest"),
+                    ("aqua", "aqua"),
+                    ("lofi", "lofi"),
+                    ("pastel", "pastel"),
+                    ("fantasy", "fantasy"),
+                    ("wireframe", "wireframe"),
+                    ("black", "black"),
+                    ("luxury", "luxury"),
+                    ("dracula", "dracula"),
+                    ("cmyk", "cmyk"),
+                    ("autumn", "autumn"),
+                    ("business", "business"),
+                    ("acid", "acid"),
+                    ("lemonade", "lemonade"),
+                    ("night", "night"),
+                    ("coffee", "coffee"),
+                    ("winter", "winter"),
+                    ("dim", "dim"),
+                    ("nord", "nord"),
+                    ("sunset", "sunset"),
+                ],
+                max_length=200,
+                null=True,
+            ),
         ),
     ]

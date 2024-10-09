@@ -26,8 +26,12 @@ Quick start
 
 5. Visit the ``/nutrition/`` URL to manage nutrition information.
 
-to update the style bundle:
+Dev Notes
+---------
+
+to update the style bundle, from within the ``django_nutrition`` directory:
+
 npm install
 npm run build:css
 
-then commit state/nutrition/styles.css
+then commit ``django_nutrition/state/nutrition/styles.css``

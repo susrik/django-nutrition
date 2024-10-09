@@ -5,15 +5,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('django_nutrition', '0002_alter_portion_quantity'),
+        ("django_nutrition", "0002_alter_portion_quantity"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='portion',
-            name='date',
+            model_name="portion",
+            name="date",
             field=models.DateField(default=django.utils.timezone.now),
         ),
     ]
