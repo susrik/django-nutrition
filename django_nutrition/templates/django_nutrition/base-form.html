@@ -1,0 +1,46 @@
+{% extends 'django_nutrition/base.html' %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen">
+    <div class="w-full max-w-md lg:w-1/3 mx-auto">
+
+        <!-- Form Container -->
+      <div class="shadow-lg rounded-lg overflow-hidden bg-base-300">
+        
+        <!-- Bar at the Top -->
+        <div class="bg-primary text-primary-content p-4 text-center">
+          <h2 class="text-lg font-bold">{% block title %}title{% endblock %}</h2>
+        </div>
+  
+        <!-- Error Message (conditionally displayed if there's an error) -->
+        {% if form.errors %}
+            <div class="bg-red-100 border border-red-500 text-red-700 px-4 py-2 my-2 w-full mx-auto">
+          <p>{{ form.non_field_errors }}</p>
+          {% for field in form %}
+              {% for error in field.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Form Fields -->
+        <form method="post" class="p-6 space-y-4">
+            {% csrf_token %}
+        
+{% block form_elements %}{% endblock %}
+
+            <!-- Submit Button -->
+            <div class="form-control mt-6">
+                <div class="col-span-2 text-center">
+                    <button type="submit" class="btn btn-primary w-full">Save</button>
+                </div>
+            </div>
+            
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

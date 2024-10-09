@@ -1,0 +1,41 @@
+{% extends 'django_nutrition/base.html' %}
+
+{% block title %}Foods{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto mt-10">
+
+    <div class="overflow-x-auto nutrition foods">
+
+        <!-- Bar at the Top -->
+        <div class="bg-primary text-primary-content p-4 text-center">
+            <h2 class="text-lg font-bold">Manage Foods</h2>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Calories</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in foods %}
+                <tr class="hover cursor-pointer {%cycle 'row-even' 'row-odd' %}" onclick="toggleSubtable('{{ d.date }}')">
+                    <td>{{ f.name }}</td>
+                    <td>{{ f.calories }}</td>
+                    <td>
+                        <a href="{% url 'add_or_edit_food' f.pk %}"class="text-blue-500 underline">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'add_or_edit_food' %}" class="text-blue-500 underline">New Food</a>
+</div>
+
+
+{% endblock %}

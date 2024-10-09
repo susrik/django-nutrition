@@ -1,0 +1,43 @@
+{% extends 'django_nutrition/base-form.html' %}
+
+{% block title %}
+    {%if food %}Edit Food{% else %}Add New Food{% endif %}
+{% endblock %}
+
+
+<h1>{% if item %}Edit Item{% else %}Add New Item{% endif %}</h1>
+
+{% block form_elements %}
+    <!-- Name field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Name</span>
+        </label>
+        <div>
+            <input
+                type="text"
+                name="name"
+                class="form-control"
+                value="{% if food %}{{ food.name }}{% else %}{{ form.name.value|default:'' }}{% endif %}"
+                id="id_name"
+           />
+        </div>
+    </div>
+
+    <!-- Calories field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Calories</span>
+        </label>
+        <div>
+            <input
+                type="number"
+                name="calories"
+                class="form-control"
+                step="0.1"
+                value="{% if food %}{{ food.calories }}{% else %}{{ form.calories.value|default:'' }}{% endif %}"
+                id="id_calories"
+            />
+        </div>
+    </div>
+{% endblock %}

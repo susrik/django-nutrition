@@ -1,0 +1,26 @@
+<table class="nutrition portions">
+    <thead>
+        <tr>
+            <th class="px-4 py-2">Food</th>
+            <th class="px-4 py-2">Quantity</th>
+            <th class="px-4 py-2">Calories</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in portions %}
+        <tr class="{%cycle 'row-even' 'row-odd' %}">
+            <td class="px-4 py-2">{{ p.food.name }}</td>
+            <td class="px-4 py-2">{{ p.quantity }}</td>
+            <td class="px-4 py-2">{{ p.calories }}</td>
+            <td>
+                <a href="{% url 'add_or_edit_portion' p.pk %}"class="text-blue-500 underline">Edit</a>
+            </td>
+            <td>
+                <a href="{% url 'delete_portion' p.pk %}"class="text-blue-500 underline">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

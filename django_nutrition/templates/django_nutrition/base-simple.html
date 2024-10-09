@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" html data-theme="{{ preferences.theme }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}--set title--{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'nutrition/css/styles.css' %}">
+    {% block extra_header_content %}{% endblock %}
+</head>
+<body>
+{% block body_content %}{% endblock %}
+</body>
+</html>

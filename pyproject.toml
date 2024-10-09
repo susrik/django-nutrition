@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []
+
+[project]
+name = "django-nutrition"
+version = "0.1.0"
+dependencies = [
+    "django>=5.1",
+    "djangorestframework",
+]
+description = "A Django app to track meals and calories."
+readme = "README.rst"
+requires-python = ">= 3.10"
+authors = [
+    {name = "Erik Reid", email = "noreply@no.domain"},
+]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Development Status :: 4 - Beta",
+]
+
+[project.urls]
+Homepage = "https://github.com/susrik/django-nutrition"

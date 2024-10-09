@@ -1,0 +1,48 @@
+{% extends 'django_nutrition/base.html' %}
+
+{% block title %}Meals {{ date }}{% endblock %}
+
+{% block extra_header_content %}
+<script>
+    function toggleSubtable(meal_name) {
+        const subtable = document.getElementById('subtable-' + meal_name);
+        subtable.classList.toggle('hidden');
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Meals {{ date }}</h1>
+    <h2 class="text-2xl font-bold mb-4">Total kcal: {{ calories }}</h2>
+
+    <div class="overflow-x-auto">
+        <a href="{% url 'add_or_edit_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
+        <table class="nutrition day">
+            <!-- Table Head -->
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Meal</th>
+                    <th class="px-4 py-2">Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in meals %}
+                <tr class="hover cursor-pointer {%cycle 'row-even' 'row-odd' %}" onclick="toggleSubtable('{{ m.name }}')">
+                    <td class="px-4 py-2">{{ m.name }}</td>
+                    <td class="px-4 py-2">{{ m.calories }}</td>
+                </tr>
+                <tr id="subtable-{{ m.name }}" class="hidden">
+                    <td colspan="2">
+                        <div class="overflow-x-auto">
+                            {% include 'django_nutrition/portions.html' with portions=m.portions %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'add_or_edit_portion' %}?date={{ date }}" class="text-blue-500 underline">Add Portion</a>
+</div>
+{% endblock %}

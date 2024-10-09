@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nutrition {
+    @apply table w-full max-w-[400px];
+    /* @apply table w-full max-w-[400px] border border-gray-300 rounded-lg; */
+}
+
+.nutrition th {
+    /* @apply bg-yellow-500 text-white rounded-t-lg; */
+    @apply font-bold;
+}
+
+/* .nutrition td {
+    @apply border-t;
+} */
+
+.row-even  {
+    /* @apply bg-yellow-100; */
+}
+
+.row-odd {
+    @apply bg-gray-50;
+}
+
+.foods {
+    @apply max-w-[600px];
+}
+
+.days {
+    @apply max-w-[400px];
+}
+
+.day {
+    @apply max-w-[400px];
+}
+
+.meal {
+    @apply max-w-[200px];
+}
+
+.portions {
+    @apply max-w-[300px];
+}
+

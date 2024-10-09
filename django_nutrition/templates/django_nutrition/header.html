@@ -1,0 +1,33 @@
+<div class="navbar">
+
+  <div class="flex-1">
+    <a class="btn btn-ghost text-xl" href="{% url 'days' %}">Nutrition</a>
+  </div>
+
+  <div class="flex-none">
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          {{ user.username }}
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <!-- <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li> -->
+        <li><a href="{% url 'foods' %}">Manage Foods</a></li>
+        <li><a href="{% url 'user_preferences' %}">Preferences</a></li>
+        <li>
+          <form method="POST" action="{% url 'logout' %}" id="logout-form" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0; font: inherit;">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

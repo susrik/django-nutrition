@@ -1,0 +1,37 @@
+{% extends 'django_nutrition/base.html' %}
+
+{% block title %}Daily Calories{% endblock %}
+
+{% block extra_header_content %}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-4">
+        <!-- Tab Navigation -->
+        <div role="tablist" class="tabs tabs-lifted">
+            <input
+                type="radio"
+                name="view_tabs"
+                role="tab"
+                class="tab"
+                aria-label="Calendar"
+                checked="checked" />
+
+            <div role="tabpanel" class="tab-content">
+                {% include 'django_nutrition/days-calendar.html' %}
+            </div>
+
+            <input
+                type="radio"
+                name="view_tabs"
+                role="tab"
+                class="tab"
+                aria-label="Table" />
+
+            <div role="tabpanel" class="tab-content hidden">
+                {% include 'django_nutrition/days-table.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

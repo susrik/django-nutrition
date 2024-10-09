@@ -1,0 +1,22 @@
+{% extends 'django_nutrition/base-form.html' %}
+
+{% block title %}Preferences{% endblock %}
+
+{% block button_label %}Save Preferences{% endblock %}
+
+{% block form_elements %}
+    <!-- max calories field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Max Calories</span>
+        </label>
+        <div>{{ form.max_calories }}</div>
+    </div>
+    <!-- theme field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Theme</span>
+        </label>
+        <div>{{ form.theme }}</div>
+    </div>
+{% endblock %}

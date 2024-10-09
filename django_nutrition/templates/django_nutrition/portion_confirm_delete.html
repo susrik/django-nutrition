@@ -1,0 +1,11 @@
+<!-- item_confirm_delete.html -->
+<h1>Delete Item: {{ portion.quantity }} x {{ portion.food.name }} [{{ portion.date }}]</h1>
+
+<p>Are you sure you want to delete this item?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'day' portion.date %}" class="text-blue-500 underline">Cancel</a>

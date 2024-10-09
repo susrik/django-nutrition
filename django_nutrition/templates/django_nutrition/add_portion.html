@@ -1,0 +1,45 @@
+{% extends 'django_nutrition/base-form.html' %}
+
+{% block title %}New Portion{% endblock %}
+
+{% block form_elements %}
+    <!-- Date field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Date</span>
+        </label>
+        <div>{{ form.date }}</div>
+    </div>
+
+    <!-- Food field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Food</span>
+        </label>
+        <div>{{ form.food }}</div>
+    </div>
+
+    <!-- Quantity field -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Quantity</span>
+        </label>
+        <div>{{ form.quantity }}</div>
+    </div>
+
+    <!-- Meal field (optional) -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Meal (Optional)</span>
+        </label>
+        <div>{{ form.meal }}</div>
+    </div>
+
+    <!-- Note field (optional) -->
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Note (Optional)</span>
+        </label>
+        <div>{{ form.note }}</div>
+            </div>
+{% endblock %}

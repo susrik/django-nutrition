@@ -1,0 +1,16 @@
+<table class="nutrition meal">
+    <thead>
+        <tr>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Calories</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in meals %}
+        <tr class="{%cycle 'row-even' 'row-odd' %}">
+            <td class="px-4 py-2">{{ m.name }}</td>
+            <td class="px-4 py-2">{{ m.calories }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
