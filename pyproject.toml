@@ -3,17 +3,17 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-py-modules = []
+packages = ["django_nutrition"]
 
 [project]
 name = "django-nutrition"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
     "django>=5.1",
     "djangorestframework",
 ]
 description = "A Django app to track meals and calories."
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">= 3.10"
 authors = [
     {name = "Erik Reid", email = "noreply@no.domain"},
