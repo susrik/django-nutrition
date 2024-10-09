@@ -33,6 +33,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Development Status :: 4 - Beta",
 ]
 
 [project.urls]
