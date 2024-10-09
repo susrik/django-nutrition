@@ -7,7 +7,7 @@ py-modules = []
 
 [project]
 name = "django-nutrition"
-version = "0.1"
+version = "0.1.0"
 dependencies = [
     "django>=5.1",
     "djangorestframework",
