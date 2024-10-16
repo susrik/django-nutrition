@@ -13,7 +13,7 @@
         <tr class="{%cycle 'row-even' 'row-odd' %}">
             <td class="px-4 py-2">{{ p.food.name }}</td>
             <td class="px-4 py-2">{{ p.quantity }}</td>
-            <td class="px-4 py-2">{{ p.calories }}</td>
+            <td class="px-4 py-2">{{ p.calories_rounded_01 }}</td>
             <td>
                 <a href="{% url 'add_or_edit_portion' p.pk %}"class="text-blue-500 underline">Edit</a>
             </td>

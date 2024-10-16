@@ -35,6 +35,10 @@ class Portion(models.Model):
     def calories(self):
         return self.food.calories * self.quantity
 
+    def calories_rounded_01(self):
+        c10 = self.calories() * 10
+        return int(c10 + 0.5) / 10
+
     def __str__(self):
         return f"{self.food.name} ({self.quantity})"
 

@@ -15,6 +15,11 @@ if TYPE_CHECKING:
 CALORIES_WARNING_THRESHOLD = 0.1  # cutoff for "slightly over"
 
 
+def round_01(value: float) -> float:
+    v10 = value * 10
+    return int(v10 + 0.5) / 10
+
+
 class DailyTotalRange(Enum):
     UNDER = "under"
     OVER = "over"
@@ -25,7 +30,7 @@ class MealTotal:
     def __init__(self, name: str, portions: Iterable[models.Portion]):
         self.name = name
         self.portions = portions
-        self.calories = sum(p.calories() for p in portions)
+        self.calories = round_01(sum(p.calories() for p in portions))
 
     def to_dict(self):
         return {"name": self.name, "calories": self.calories, "portions": self.portions}
