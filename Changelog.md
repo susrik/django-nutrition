@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2024-10-16
+- added note field to portion table
+- added warning threshold color (hard-coded at 10%)
+
 ## [0.3.0] - 2024-10-09
 - more packaging fixes
 
