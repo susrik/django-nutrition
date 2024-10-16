@@ -29,7 +29,7 @@ def day(request, day_str):
     context = {
         "meals": meals,
         "date": day_str,
-        "calories": sum(m.calories for m in meals),
+        "calories": api.round_01(sum(m.calories for m in meals)),
     }
     return HttpResponse(template.render(context, request))
 
