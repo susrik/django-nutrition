@@ -1,3 +1,4 @@
+from enum import Enum
 from datetime import datetime
 from typing import Iterable, List, TYPE_CHECKING
 from django.utils import timezone
@@ -9,6 +10,24 @@ from rest_framework import serializers
 
 if TYPE_CHECKING:
     from django.http import HttpRequest
+
+OVER_THRESHOLD = .1  # cutoff for "slightly over"
+
+class DailyTotalRange(Enum):
+    UNDER = "under"
+    OVER = "over"
+    SLIGHTLY_OVER = "slightly_over"
+
+
+def _get_calorie_range(calories: float, max_calories: float) -> DailyTotalRange:
+    if calories < max_calories:
+        return DailyTotalRange.UNDER
+    elif calories > max_calories * (1 + OVER_THRESHOLD):
+        return DailyTotalRange.OVER
+    else:
+        return DailyTotalRange.SLIGHTLY_OVER
+
+
 
 
 class MealTotal:
@@ -45,7 +64,10 @@ class DayTotal:
 
 
 class FullDayEvent:
-    def __init__(self, day: DayTotal, over: False):
+
+    def __init__(self,
+                 day: DayTotal,
+                 range: DailyTotalRange = DailyTotalRange.UNDER):
         self.title = str(int(day.calories + 0.5))
         self.start = day.date
         self.end = day.date
@@ -53,9 +75,11 @@ class FullDayEvent:
         self.description = f"{day.calories} calories"
         # self.display = 'background'
         self.display = "auto"
-        self.backgroundColor = "red" if over else "green"
-        self.textColor = "white"
         self.url = f"/nutrition/day/{day.date}"
+
+        style = CALORIE_RANGE_STYLES[range]
+        self.backgroundColor = style["backgroundColor"]
+        self.textColor = style["textColor"]
 
 
 class FullDayEventSerializer(serializers.Serializer):
@@ -96,7 +120,8 @@ def days(request: "HttpRequest"):
     _prefs = models.Preferences.current_preferences(request)
 
     def _make_event(day: DayTotal):
-        return FullDayEvent(day, over=day.calories > _prefs["max_calories"])
+        range = _get_calorie_range(day.calories, _prefs["max_calories"])
+        return FullDayEvent(day, range=range)
 
     serializer = FullDayEventSerializer(map(_make_event, _days), many=True)
     return Response(serializer.data)
