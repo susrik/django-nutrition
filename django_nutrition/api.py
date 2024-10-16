@@ -12,7 +12,7 @@ from rest_framework import serializers
 if TYPE_CHECKING:
     from django.http import HttpRequest
 
-CALORIES_WARNING_THRESHOLD = .1  # cutoff for "slightly over"
+CALORIES_WARNING_THRESHOLD = 0.1  # cutoff for "slightly over"
 
 
 class DailyTotalRange(Enum):
@@ -55,7 +55,6 @@ class DayTotal:
 
 
 class FullDayEvent:
-
     CALORIE_RANGE_STYLES = {
         DailyTotalRange.UNDER: {
             "backgroundColor": "green",
@@ -73,9 +72,8 @@ class FullDayEvent:
 
     @staticmethod
     def get_calorie_range(
-            calories: float,
-            max_calories: float,
-            warning_threshold: float = 0) -> DailyTotalRange:
+        calories: float, max_calories: float, warning_threshold: float = 0
+    ) -> DailyTotalRange:
         assert warning_threshold > 0
         if calories < max_calories:
             return DailyTotalRange.UNDER
@@ -84,10 +82,9 @@ class FullDayEvent:
         else:
             return DailyTotalRange.SLIGHTLY_OVER
 
-    def __init__(self,
-                 day: DayTotal,
-                 max_calories: float,
-                 warning_threshold: float = 0):
+    def __init__(
+        self, day: DayTotal, max_calories: float, warning_threshold: float = 0
+    ):
         self.title = str(int(day.calories + 0.5))
         self.start = day.date
         self.end = day.date
@@ -140,8 +137,10 @@ def days(request: "HttpRequest"):
 
     _prefs = models.Preferences.current_preferences(request)
 
-    _make_event = partial(FullDayEvent,
-            max_calories=_prefs["max_calories"],
-            warning_threshold=CALORIES_WARNING_THRESHOLD)
+    _make_event = partial(
+        FullDayEvent,
+        max_calories=_prefs["max_calories"],
+        warning_threshold=CALORIES_WARNING_THRESHOLD,
+    )
     serializer = FullDayEventSerializer(map(_make_event, _days), many=True)
     return Response(serializer.data)
