@@ -97,11 +97,11 @@ def add_or_edit_portion(request, pk=None):
             return redirect("day", day_str=day_str)
     else:
         params = {
-            'instance': _portion,
-            'user': request.user,
+            "instance": _portion,
+            "user": request.user,
         }
         if not _portion:
-            params['initial'] = {'date': request.GET.get("date", timezone.now().date())}
+            params["initial"] = {"date": request.GET.get("date", timezone.now().date())}
 
         form = PortionForm(**params)
 

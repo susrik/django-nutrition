@@ -7,6 +7,7 @@ from .models import Portion, Food, Meal
 from .api import MealTotal
 from datetime import timedelta
 
+
 class MealTotalTests(TestCase):
     def test_split_portions(self):
         user = User.objects.create_user("test2", "1234")
@@ -106,11 +107,10 @@ class AddOrEditPortionViewTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username=AddOrEditPortionViewTest.USERNAME,
-            password=AddOrEditPortionViewTest.PASSWORD)
-        self.food = Food.objects.create(
-            name='Test Food', calories=100, user=self.user)
-        self.meal = Meal.objects.create(
-            name='Test Meal', user=self.user)
+            password=AddOrEditPortionViewTest.PASSWORD,
+        )
+        self.food = Food.objects.create(name="Test Food", calories=100, user=self.user)
+        self.meal = Meal.objects.create(name="Test Meal", user=self.user)
 
     def test_edit_portion_default_date(self):
         # Create a portion from a week ago
@@ -120,18 +120,19 @@ class AddOrEditPortionViewTest(TestCase):
             food=self.food,
             meal=self.meal,
             quantity=1,
-            date=one_week_ago
+            date=one_week_ago,
         )
 
         # Log in the user
         self.client.login(
             username=AddOrEditPortionViewTest.USERNAME,
-            password=AddOrEditPortionViewTest.PASSWORD)
+            password=AddOrEditPortionViewTest.PASSWORD,
+        )
 
         # Get the edit portion page
-        response = self.client.get(reverse(
-            'add_or_edit_portion', kwargs={'pk': portion.pk}
-        ))
+        response = self.client.get(
+            reverse("add_or_edit_portion", kwargs={"pk": portion.pk})
+        )
 
         # Check that the response is successful
         self.assertEqual(response.status_code, 200)
@@ -140,5 +141,5 @@ class AddOrEditPortionViewTest(TestCase):
         self.assertContains(response, f'value="{one_week_ago.isoformat()}"')
 
         # Optionally, you can also check the form's initial data
-        form = response.context['form']
-        self.assertEqual(form.initial['date'], one_week_ago)
+        form = response.context["form"]
+        self.assertEqual(form.initial["date"], one_week_ago)
