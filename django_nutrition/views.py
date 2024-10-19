@@ -96,10 +96,14 @@ def add_or_edit_portion(request, pk=None):
             day_str = selected_date.strftime("%Y-%m-%d")
             return redirect("day", day_str=day_str)
     else:
-        default_date = request.GET.get("date", timezone.now().date())
-        form = PortionForm(
-            initial={"date": default_date}, instance=_portion, user=request.user
-        )
+        params = {
+            "instance": _portion,
+            "user": request.user,
+        }
+        if not _portion:
+            params["initial"] = {"date": request.GET.get("date", timezone.now().date())}
+
+        form = PortionForm(**params)
 
     return render(request, "django_nutrition/add_portion.html", {"form": form})
 
