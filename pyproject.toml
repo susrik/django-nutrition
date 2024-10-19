@@ -7,7 +7,7 @@ packages = ["django_nutrition", "django_nutrition.utils"]
 
 [project]
 name = "django-nutrition"
-version = "0.5.0"
+version = "0.6.0"
 dependencies = [
     "django>=5.1",
     "djangorestframework",
